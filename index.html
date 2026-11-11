@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
-<title>Ruta SISE · Administrador v67</title>
+<title>Ruta SISE · Administrador v70</title>
 <script>
 window.RUTA_SISE_ADMIN_CONFIG={
   // Misma URL /exec que usa el registro de Ruta SISE
@@ -19,15 +19,118 @@ window.RUTA_SISE_ADMIN_CONFIG={
 .modal-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.45);backdrop-filter:blur(3px);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.open{display:flex}.modal{width:min(930px,100%);max-height:90vh;overflow:hidden;background:#fff;border-radius:20px;display:flex;flex-direction:column}.modal-head{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}.modal-body{padding:18px;overflow:auto}.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.detail{padding:10px;border:1px solid var(--line);border-radius:10px;background:#fafafa}.detail small{display:block;color:var(--muted);font-size:10px}.detail strong{font-size:12px;word-break:break-word}.wide{grid-column:1/-1}.items-wrap{margin-top:16px}.item-card{border:1px solid var(--line);border-radius:12px;margin-top:9px;overflow:hidden}.item-head{background:#fafafa;padding:10px 12px;font-weight:800}.item-body{padding:12px;display:grid;gap:8px}.item-body div small{display:block;color:var(--muted);font-size:10px}.evidence-list{display:grid;gap:9px}.ev{border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;justify-content:space-between;gap:12px;align-items:center}.ev span{display:block;color:var(--muted);font-size:11px;margin-top:3px}.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);opacity:0;background:var(--dark);color:#fff;border-radius:11px;padding:11px 14px;font-size:12px;z-index:200;transition:.2s}.toast.show{opacity:1;transform:translate(-50%,0)}
 @media(max-width:1100px){.app{grid-template-columns:1fr}.side{display:none}.filter-grid{grid-template-columns:repeat(3,1fr)}.content{padding:28px 18px}.kpis{grid-template-columns:repeat(3,1fr)}}@media(max-width:700px){.filter-grid{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.hero{display:block}.hero-actions{margin-top:14px}.detail-grid{grid-template-columns:1fr}.wide{grid-column:auto}.ev{display:block}.actions{margin-top:8px}}
 .filter-grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))!important}.control{min-width:0}.control select,.control input{width:100%;min-width:0}a.btn{text-decoration:none;display:inline-flex;align-items:center;gap:6px}.hero-actions .btn{font-size:14px;font-weight:700;min-height:40px;padding:9px 13px}
+
+/* ===== v70 · Tablero de resultados ===== */
+.dash{display:block;margin-top:4px}
+.dash-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 16px}
+.dash-kpi{position:relative;padding:15px 16px;background:#fff;border:1px solid var(--line);border-radius:16px;min-width:0}
+.dash-kpi small{display:block;color:var(--muted);font-size:12px;font-weight:700}
+.dash-kpi strong{display:block;font-size:30px;line-height:1.1;margin:6px 0 4px;color:var(--ink);letter-spacing:-.01em}
+.dash-kpi span{display:block;color:var(--muted);font-size:12px;line-height:1.4}
+.dash-flag{display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-style:normal;font-size:12px;font-weight:700;padding:3px 8px;border-radius:999px}
+.dash-flag svg{width:13px;height:13px}
+.dash-flag.warn{background:#fff7e6;color:#8a5a00}
+.dash-flag.good{background:#edf8f4;color:#0f6a4d}
+.dash-guide{border:1px solid var(--line);border-radius:14px;background:var(--paper);margin:0 0 16px;padding:0 16px}
+.dash-guide summary{cursor:pointer;padding:13px 0;font-weight:800;font-size:14px;color:var(--ink)}
+.dash-guide ul{margin:0 0 14px;padding-left:18px;color:#475569;font-size:13px;line-height:1.6}
+.dash-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.dash-card{border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:var(--shadow);padding:18px 18px 14px;min-width:0}
+.dash-card.wide{grid-column:1/-1}
+.dash-card header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.dash-card h3{margin:0;font-size:16px;color:var(--ink)}
+.dash-why{margin:5px 0 12px;color:var(--muted);font-size:12.5px;line-height:1.5}
+.dash-plot{width:100%;min-height:40px;overflow-x:auto}
+.dash-svg{display:block;max-width:none}
+.dash-svg text{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+.dash-svg [data-tip]{cursor:default}
+.dash-svg [data-tip]:hover{opacity:.85}
+.dash-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 0 10px;font-size:12px;color:#475569}
+.dash-legend span{display:inline-flex;align-items:center;gap:6px}
+.dash-legend i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.dash-legend .ramp{width:90px;height:10px;border-radius:3px}
+.dash-note{font-size:12.5px;color:#475569;background:var(--paper);border-radius:10px;padding:8px 10px;margin:8px 0 0;line-height:1.5}
+.dash-empty{padding:26px 10px;text-align:center;color:var(--muted);font-size:13px;background:var(--paper);border-radius:12px}
+.dash-seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;flex:0 0 auto}
+.dash-seg button{border:0;background:#fff;padding:6px 10px;font-size:12px;font-weight:700;color:#475569}
+.dash-seg button.active{background:var(--dark);color:#fff}
+.dash-data{margin-top:8px}
+.dash-data summary{cursor:pointer;font-size:12px;font-weight:700;color:#475569;padding:4px 0}
+.dash-table-wrap{overflow:auto;max-height:260px;border:1px solid var(--line);border-radius:10px;margin-top:6px}
+.dash-table-wrap table{border-collapse:collapse;width:100%;font-size:12px}
+.dash-table-wrap th{background:#f8fafc;text-align:left;padding:7px 9px;color:var(--muted);position:sticky;top:0;white-space:nowrap}
+.dash-table-wrap td{padding:7px 9px;border-top:1px solid #eef1f5;white-space:nowrap}
+.dash-meters{display:grid;gap:14px}
+.dash-meter-top{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:var(--ink)}
+.dash-meter-top b{font-size:14px;white-space:nowrap}
+.dash-meter-sub{font-size:11.5px;color:var(--muted);margin-top:2px;display:flex;justify-content:space-between;gap:8px}
+.dash-track{position:relative;height:8px;border-radius:4px;background:#eef1f5;margin-top:6px}
+.dash-track i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:#3f3a3c}
+.dash-track u{position:absolute;top:-4px;bottom:-4px;width:2px;background:#94a3b8}
+.dash-pend{width:100%;border-collapse:collapse;min-width:860px}
+.dash-pend th{padding:9px 10px;text-align:left;background:#f8fafc;color:var(--muted);font-size:11px;white-space:nowrap}
+.dash-pend td{padding:10px;border-top:1px solid #eef1f5;font-size:12px;vertical-align:top}
+.nat-badge{display:inline-flex;align-items:center;gap:5px;font-weight:700;font-size:11px;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.nat-badge i{width:8px;height:8px;border-radius:2px}
+.nat-badge.alerta{background:#fbe9eb;color:#8e1a29}.nat-badge.brecha{background:#fdf0ee;color:#9a3b30}
+.dash-tip{position:fixed;z-index:300;pointer-events:none;background:#241F21;color:#fff;border-radius:10px;padding:8px 10px;font-size:12px;line-height:1.45;white-space:pre-line;max-width:300px;box-shadow:0 10px 24px rgba(0,0,0,.18);opacity:0;transition:opacity .12s}
+.dash-tip.show{opacity:1}
+@media(max-width:1100px){.dash-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.dash-grid{grid-template-columns:1fr}}
+@media(max-width:520px){.dash-kpis{grid-template-columns:1fr 1fr;gap:8px}.dash-kpi{padding:12px}.dash-kpi strong{font-size:24px}.dash-card{padding:14px 12px 10px}}
+
+/* ===== v70 · Importar Excel ===== */
+#importBtn{display:inline-flex;align-items:center;gap:6px}
+.imp-modal{width:min(980px,100%)}
+.imp-drop{display:grid;justify-items:center;gap:6px;text-align:center;border:1.5px dashed #e2c3cd;background:#fff9fb;border-radius:16px;padding:28px 18px;cursor:pointer;color:#7a1430}
+.imp-drop strong{font-size:15px;color:var(--ink)}.imp-drop span{font-size:12.5px;color:var(--muted);max-width:520px;line-height:1.5}
+.imp-drop input{margin-top:6px;font-size:13px}
+.imp-help{margin-top:12px;font-size:12.5px;line-height:1.55;color:#475569;background:var(--paper);border-radius:10px;padding:10px 12px}
+.imp-help .mini{margin-left:6px}
+.imp-privacy{background:#fff7e6;color:#7a4b00}
+.imp-h{margin:18px 0 6px;font-size:14px;color:var(--ink)}
+.imp-sub{display:block;margin:0 0 8px;font-size:12px;color:var(--muted)}
+.imp-file{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding:10px 12px;border:1px solid var(--line);border-radius:12px}
+.imp-file span{font-size:12px;color:var(--muted)}.imp-file label{font-size:12px;color:#475569;display:flex;gap:6px;align-items:center}
+.imp-file select{min-height:32px;border:1px solid #d8dee7;border-radius:8px;padding:4px 8px}
+.imp-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 18px}
+.imp-map-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:4px 8px;align-items:center;padding:4px 0}
+.imp-map-row label{font-size:12.5px;font-weight:700;color:var(--ink)}.imp-map-row .req{color:var(--red)}
+.imp-map-row select{min-height:34px;border:1px solid #d8dee7;border-radius:8px;padding:5px 8px;background:#fff;min-width:0}
+.imp-map-row.missing select{border-color:var(--red);background:#fff5f7}
+.imp-sample{grid-column:2;font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:13px}
+.imp-stats{display:flex;flex-wrap:wrap;gap:8px}
+.imp-stats span{font-size:12.5px;padding:6px 10px;border-radius:999px}
+.imp-stats .ok{background:#edf8f4;color:#0f6a4d}.imp-stats .warn{background:#fff7e6;color:#8a5a00}.imp-stats .err{background:#fbe9eb;color:#8e1a29}
+.imp-issues{margin-top:10px;border:1px solid #f2c4cf;border-radius:10px;padding:6px 12px;background:#fff9fa}
+.imp-issues.warn{border-color:#f3dfb4;background:#fffcf4}
+.imp-issues summary{cursor:pointer;font-size:12.5px;font-weight:700;padding:3px 0}
+.imp-issues ul{margin:6px 0;padding-left:18px;font-size:12px;line-height:1.55;color:#475569}
+.imp-preview{margin-top:12px;overflow:auto}
+.imp-preview table{border-collapse:collapse;width:100%;font-size:12px;min-width:640px}
+.imp-preview th{background:#f8fafc;color:var(--muted);text-align:left;padding:7px 9px;white-space:nowrap}
+.imp-preview td{padding:7px 9px;border-top:1px solid #eef1f5}
+.imp-batches{display:grid;gap:8px}
+.imp-batch{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.imp-batch span{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+.imp-foot{display:flex;justify-content:flex-end;align-items:center;gap:8px;padding:12px 18px;border-top:1px solid var(--line)}
+.imp-foot .btn{min-height:40px;font-size:14px}.imp-foot .btn:disabled{opacity:.45;cursor:not-allowed}
+.imp-foot-msg{margin-right:auto;font-size:12px;color:var(--red)}
+.imp-progress{margin-top:14px}.imp-progress span{display:block;font-size:12.5px;color:#475569;margin-top:6px}
+.imp-progress i{display:block;height:8px;border-radius:4px;background:var(--ink);width:0;transition:width .3s}
+.imp-progress::before{content:'';display:block;height:8px;border-radius:4px;background:#eef1f5;margin-bottom:-8px}
+.badge.imp{background:#eef2ff;color:#3730a3;margin-top:4px}
+@media(max-width:760px){.imp-map{grid-template-columns:1fr}.imp-map-row{grid-template-columns:120px minmax(0,1fr)}}
+.imp-map-row select,.imp-file select{font-size:13px}.imp-more{margin-top:8px}.imp-more summary{cursor:pointer;font-size:12.5px;font-weight:700;color:#475569;padding:6px 0}
+.imp-check{display:flex;gap:8px;align-items:flex-start;margin-top:12px;font-size:13px;color:var(--ink);cursor:pointer}.imp-check input{margin-top:3px;accent-color:#c8173e}
 </style>
 </head>
 <body>
 <section class="login" id="loginScreen"><div class="login-card"><div class="brand">SISE<b>»</b></div><h1>Ruta SISE · Administrador</h1><p>Acceso restringido. Ingresa con el correo y la contraseña de administrador asignados. Los registros y evidencias se consultan desde la carpeta institucional de Google Drive.</p><form id="loginForm"><div class="field"><label>Correo</label><input id="loginEmail" type="email" autocomplete="username" required></div><div class="field"><label>Contraseña</label><input id="loginPassword" type="password" autocomplete="current-password" required></div><button class="btn btn-primary" type="submit" id="loginBtn">Ingresar</button><div class="login-msg" id="loginMsg"></div></form></div></section>
 <div class="app hidden" id="adminApp">
-<aside class="side"><div class="brand">SISE<b>»</b></div><h2>Ruta SISE</h2><p>Consulta institucional de registros, tiempos, visitas y evidencias.</p><div class="nav"><button id="navRecords" class="active">Registros de campo</button><button id="navVisits">Inicio / cierre de visitas</button></div><div class="side-foot">Administrador v67 · SISE 2026</div></aside>
+<aside class="side"><div class="brand">SISE<b>»</b></div><h2>Ruta SISE</h2><p>Consulta institucional de registros, tiempos, visitas y evidencias.</p><div class="nav"><button id="navDashboard" class="active">Tablero de resultados</button><button id="navRecords">Registros de campo</button><button id="navVisits">Inicio / cierre de visitas</button></div><div class="side-foot">Administrador v70 · SISE 2026</div></aside>
 <main class="main"><div class="top"><strong>Administrador Ruta SISE</strong><div><span class="user" id="userEmail"></span> <button class="mini" id="logoutBtn">Salir</button></div></div>
-<div class="content"><div class="hero"><div><h1 id="viewTitle">Registros de campo</h1><p id="viewSubtitle">El consolidado de registros contiene únicamente registros cerrados. Los eventos de inicio y cierre se consultan por separado en la vista de visitas.</p></div><div class="hero-actions"><button class="btn btn-primary" id="refreshBtn">↻ Actualizar</button><button class="btn btn-outline" id="downloadFiltered">⇩ Descargar filtrado</button><button class="btn btn-outline" id="clearFilters">Limpiar filtros</button><a class="btn btn-outline" id="openSheet" target="_blank" rel="noopener">Abrir consolidado ↗</a><button class="btn btn-outline" id="downloadWorkbook">⇩ Excel general</button><a class="btn btn-outline" id="openFolder" target="_blank" rel="noopener">Carpeta Drive ↗</a></div></div>
-<div class="kpis"><div class="kpi"><small>Registros</small><strong id="kpiRecords">0</strong></div><div class="kpi"><small>Visitas</small><strong id="kpiVisits">0</strong></div><div class="kpi"><small>Ítems</small><strong id="kpiItems">0</strong></div><div class="kpi"><small>Evidencias</small><strong id="kpiEvidence">0</strong></div><div class="kpi"><small>Tiempo promedio</small><strong id="kpiTime">0m</strong></div></div>
+<div class="content"><div class="hero"><div><h1 id="viewTitle">Registros de campo</h1><p id="viewSubtitle">El consolidado de registros contiene únicamente registros cerrados. Los eventos de inicio y cierre se consultan por separado en la vista de visitas.</p></div><div class="hero-actions"><button class="btn btn-primary" id="refreshBtn">↻ Actualizar</button><button class="btn btn-outline" id="importBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M12 17v-6M9 14l3-3 3 3"/></svg>Importar Excel</button><button class="btn btn-outline" id="downloadFiltered">⇩ Descargar filtrado</button><button class="btn btn-outline" id="clearFilters">Limpiar filtros</button><a class="btn btn-outline" id="openSheet" target="_blank" rel="noopener">Abrir consolidado ↗</a><button class="btn btn-outline" id="downloadWorkbook">⇩ Excel general</button><a class="btn btn-outline" id="openFolder" target="_blank" rel="noopener">Carpeta Drive ↗</a></div></div>
+<div class="kpis" id="kpiRow"><div class="kpi"><small>Registros</small><strong id="kpiRecords">0</strong></div><div class="kpi"><small>Visitas</small><strong id="kpiVisits">0</strong></div><div class="kpi"><small>Ítems</small><strong id="kpiItems">0</strong></div><div class="kpi"><small>Evidencias</small><strong id="kpiEvidence">0</strong></div><div class="kpi"><small>Tiempo promedio</small><strong id="kpiTime">0m</strong></div></div>
 <section class="panel filters" id="recordFilters"><div class="filters-head"><h3>Filtros de registros</h3><span class="sub">Los filtros muestran los catálogos institucionales completos, aunque todavía no existan registros con esas opciones.</span></div><div class="filter-grid">
 <div class="control"><label>Buscar</label><input id="searchInput" placeholder="ID, persona, detalle, curso..."></div>
 <div class="control"><label>Sede</label><select id="campusFilter"><option value="">Todas</option></select></div>
@@ -42,16 +145,20 @@ window.RUTA_SISE_ADMIN_CONFIG={
 <div class="control"><label>Tipo persona</label><select id="personTypeFilter"><option value="">Todos</option></select></div>
 <div class="control"><label>Modo voz</label><select id="voiceModeFilter"><option value="">Todos</option></select></div>
 
+<div class="control"><label>Origen</label><select id="sourceFilter"><option value="">Todos</option></select></div>
 <div class="control"><label>Fecha</label><input id="dateFilter" type="date"></div>
 </div></section>
-<section class="panel"><div class="history-head"><div><h3 id="tableTitle">Registros</h3><span class="sub" id="resultCount">—</span></div><span class="sub" id="syncStatus">Conectando…</span></div><div id="tableArea" class="empty">Cargando...</div></section>
+<section class="dash hidden" id="dashboard" aria-live="polite"></section>
+<section class="panel" id="tablePanel"><div class="history-head"><div><h3 id="tableTitle">Registros</h3><span class="sub" id="resultCount">—</span></div><span class="sub" id="syncStatus">Conectando…</span></div><div id="tableArea" class="empty">Cargando...</div></section>
 </div></main></div>
 <div class="modal-backdrop" id="detailModal"><div class="modal"><div class="modal-head"><div><strong>Detalle</strong><span class="sub" id="detailSubtitle"></span></div><button class="mini" data-close="detailModal">✕</button></div><div class="modal-body"><div class="detail-grid" id="detailGrid"></div><div id="itemsDetail" class="items-wrap"></div></div></div></div>
 <div class="modal-backdrop" id="evidenceModal"><div class="modal"><div class="modal-head"><div><strong>Evidencias</strong><span class="sub" id="evidenceSubtitle"></span></div><button class="mini" data-close="evidenceModal">✕</button></div><div class="modal-body"><div class="evidence-list" id="evidenceBody"></div></div></div></div>
+<div class="modal-backdrop" id="importModal"><div class="modal imp-modal"><div class="modal-head"><div><strong>Importar Excel al consolidado</strong><span class="sub">Los registros importados se suman al tablero, las tablas y las descargas.</span></div><button class="mini" data-close="importModal">✕</button></div><div class="modal-body" id="impBody"></div><div class="imp-foot" id="impFoot"></div></div></div>
 <div class="toast" id="toast"></div>
+<div class="dash-tip" id="dashTip" role="tooltip"></div>
 <script>
 const C=window.RUTA_SISE_ADMIN_CONFIG||{},$=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const state={records:[],visits:[],filtered:[],view:'records',evidencesByRecord:{}};
+const state={records:[],visits:[],filtered:[],view:'dashboard',evidencesByRecord:{}};
 function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),2600)}
 function openModal(id){$('#'+id).classList.add('open')}function closeModal(id){$('#'+id).classList.remove('open')}
@@ -112,35 +219,600 @@ function buildFilters(){
   fill('#natureFilter',catalogUnion(FILTER_CATALOGS.natures,state.records.map(r=>r.nature)));
   fill('#personTypeFilter',catalogUnion(FILTER_CATALOGS.personTypes,state.records.map(r=>r.personType)));
   fill('#voiceModeFilter',catalogUnion(FILTER_CATALOGS.voiceModes,state.records.map(r=>r.voiceMode)));
+  fill('#sourceFilter',catalogUnion(['Registro en campo','Importado'],state.records.map(srcOf)));
 }
 function refreshObservedFilter(){const dim=$('#dimensionFilter')?.value||'',dynamic=state.records.map(r=>r.queObservo||r.criteria),fixed=dim?(FILTER_CATALOGS.observedByDimension[dim]||[]):allObservedCatalog();fill('#observedFilter',catalogUnion(fixed,dynamic))}
+function srcOf(r){return r.source||(r.importBatch?'Importado':'Registro en campo')}
 function hasToken(value,token){if(!token)return true;return String(value||'').split(/\s*\|\|\s*|\s*\|\s*/).map(x=>x.trim()).includes(token)}
 function dateOnly(v){return String(v||'').slice(0,10)}
 function applyFilters(){if(state.view==='visits'){const q=$('#searchInput').value.trim().toLowerCase(),camp=$('#campusFilter').value,area=$('#areaFilter').value,role=$('#roleFilter').value,mod=$('#modalityFilter').value,date=$('#dateFilter').value;state.filtered=state.visits.filter(r=>(!q||JSON.stringify(r).toLowerCase().includes(q))&&(!camp||r.campus===camp)&&(!area||r.visitorArea===area)&&(!role||r.visitorRole===role)&&(!mod||r.modality===mod)&&(!date||dateOnly(r.visitDate)===date));renderVisits();return}
-const q=$('#searchInput').value.trim().toLowerCase(),camp=$('#campusFilter').value,type=$('#typeFilter').value,dim=$('#dimensionFilter').value,obs=$('#observedFilter').value,area=$('#areaFilter').value,role=$('#roleFilter').value,mod=$('#modalityFilter').value,nat=$('#natureFilter').value,ptype=$('#personTypeFilter').value,vm=$('#voiceModeFilter').value,fac=$('#facultyFilter').value,date=$('#dateFilter').value;state.filtered=state.records.filter(r=>(!q||JSON.stringify(r).toLowerCase().includes(q))&&(!camp||r.campus===camp)&&(!type||r.recordType===type)&&hasToken(r.dimension,dim)&&hasToken(r.queObservo||r.criteria,obs)&&(!area||r.visitorArea===area)&&(!role||r.visitorRole===role)&&(!mod||r.modality===mod)&&hasToken(r.nature,nat)&&(!ptype||r.personType===ptype)&&(!vm||r.voiceMode===vm)&&(!fac||r.faculty===fac)&&(!date||dateOnly(r.recordDate)===date));renderRecords()}
+const q=$('#searchInput').value.trim().toLowerCase(),camp=$('#campusFilter').value,type=$('#typeFilter').value,dim=$('#dimensionFilter').value,obs=$('#observedFilter').value,area=$('#areaFilter').value,role=$('#roleFilter').value,mod=$('#modalityFilter').value,nat=$('#natureFilter').value,ptype=$('#personTypeFilter').value,vm=$('#voiceModeFilter').value,fac=$('#facultyFilter').value,src=$('#sourceFilter').value,date=$('#dateFilter').value;state.filtered=state.records.filter(r=>(!q||JSON.stringify(r).toLowerCase().includes(q))&&(!camp||r.campus===camp)&&(!type||r.recordType===type)&&hasToken(r.dimension,dim)&&hasToken(r.queObservo||r.criteria,obs)&&(!area||r.visitorArea===area)&&(!role||r.visitorRole===role)&&(!mod||r.modality===mod)&&hasToken(r.nature,nat)&&(!ptype||r.personType===ptype)&&(!vm||r.voiceMode===vm)&&(!fac||r.faculty===fac)&&(!src||srcOf(r)===src)&&(!date||dateOnly(r.recordDate)===date));state.view==='dashboard'?renderDashboard():renderRecords()}
 function fmtDuration(r){const s=Number(r.recordDurationSeconds||0);if(s>0){const m=Math.floor(s/60),sec=s%60;return `${m}m ${sec}s`}const m=Number(r.recordDurationMinutes||0);return m?`${m} min`:'—'}
 function renderRecords(){const r=state.filtered,visits=new Set(state.visits.map(x=>x.visitId).filter(Boolean));$('#kpiRecords').textContent=new Set(r.map(x=>x.recordId).filter(Boolean)).size;$('#kpiVisits').textContent=visits.size;$('#kpiItems').textContent=r.length;$('#kpiEvidence').textContent=[...new Set(r.map(x=>x.recordId).filter(Boolean))].reduce((n,id)=>n+(state.evidencesByRecord[id]?.length||0),0);const unique=[...new Map(r.map(x=>[x.recordId,x])).values()],secs=unique.reduce((n,x)=>n+Number(x.recordDurationSeconds||0),0);$('#kpiTime').textContent=unique.length?`${Math.round(secs/unique.length/60*10)/10}m`:'0m';$('#resultCount').textContent=`${r.length} ítem(s) · ${new Set(r.map(x=>x.recordId).filter(Boolean)).size} registro(s)`;const a=$('#tableArea');if(!r.length){a.className='empty';a.textContent='No hay registros con estos filtros.';return}a.className='table-wrap';a.innerHTML=`<table class="table"><thead><tr><th>Fecha / tiempo</th><th>ID visita</th><th>ID registro</th><th>Ítem</th><th>Tipo</th><th>Dimensión</th><th>¿Qué observaste?</th><th>Detalle</th><th>Persona / contexto</th><th>Evidencias</th><th>Acciones</th></tr></thead><tbody>${r.map(rowRecord).join('')}</tbody></table>`}
 function visitEventLabel(v){const e=String(v.systemEvent||v.event||'').toUpperCase();if(e.includes('INICIO'))return 'Inicio de visita';if(e.includes('CIERRE')||e.includes('FIN'))return 'Cierre de visita';return v.systemEvent||v.event||'Evento de visita'}
 function visitEventTime(v){return v.eventTime||v.recordTime||v.visitStartTime||v.visitEndTime||'—'}
 function renderVisits(){const r=state.filtered;const visitIds=new Set(r.map(x=>x.visitId).filter(Boolean));$('#kpiRecords').textContent='—';$('#kpiVisits').textContent=visitIds.size;$('#kpiItems').textContent=r.length;$('#kpiEvidence').textContent='—';const durations=[...new Map(r.filter(x=>Number(x.durationMinutes||0)>0).map(x=>[x.visitId,Number(x.durationMinutes||0)])).values()];$('#kpiTime').textContent=durations.length?`${Math.round(durations.reduce((a,b)=>a+b,0)/durations.length*10)/10}m`:'0m';$('#resultCount').textContent=`${r.length} evento(s) · ${visitIds.size} visita(s)`;const a=$('#tableArea');if(!r.length){a.className='empty';a.textContent='No hay eventos de visita con estos filtros.';return}a.className='table-wrap';a.innerHTML=`<table class="table"><thead><tr><th>Fecha</th><th>Evento</th><th>ID visita</th><th>Hora</th><th>Visitante</th><th>Área / rol</th><th>Sede</th><th>Modalidad</th><th>Duración</th></tr></thead><tbody>${r.map(v=>`<tr><td><strong>${esc(dateOnly(v.visitDate)||'—')}</strong></td><td><span class="badge ${String(v.systemEvent||'').toUpperCase().includes('CIERRE')?'green':'amber'}">${esc(visitEventLabel(v))}</span></td><td><strong>${esc(v.visitId||'—')}</strong></td><td>${esc(visitEventTime(v))}</td><td><strong>${esc(v.visitorName||'—')}</strong><span class="sub">${esc(v.visitorEmail||'')}</span></td><td>${esc(v.visitorArea||'—')}<span class="sub">${esc(v.visitorRole||'')}</span></td><td>${esc(v.campus||'—')}</td><td>${esc(v.modality||'—')}</td><td>${Number(v.durationMinutes||0)>0?esc(v.durationMinutes)+' min':'—'}</td></tr>`).join('')}</tbody></table>`} 
 function rowKey(r){return `${r.recordId||''}__${Number(r.itemNumber||1)}`}
-function rowRecord(r){const ev=state.evidencesByRecord[r.recordId]||[];return `<tr><td><strong>${esc(dateOnly(r.recordDate)||'—')}</strong><span class="sub">${esc(r.recordStartTime||'—')} → ${esc(r.recordEndTime||'—')}</span><span class="sub">${esc(fmtDuration(r))}</span></td><td><strong>${esc(r.visitId||'—')}</strong></td><td><strong>${esc(r.recordId||'—')}</strong></td><td><span class="badge amber">Ítem ${Number(r.itemNumber||1)}</span></td><td>${esc(r.recordType||'Registro')}</td><td>${esc(r.dimension||'—')}</td><td>${esc(r.queObservo||'—')}</td><td>${esc(r.detailFinding||'—')}</td><td><strong>${esc(r.personName||r.campus||'—')}</strong><span class="sub">${esc([r.voiceMode,r.program,r.course,r.turn].filter(Boolean).join(' · '))}</span></td><td><span class="badge ${ev.length?'green':'gray'}">${Number(r.evidenceCount||0)} reg. / ${ev.length} en Drive</span></td><td><div class="actions"><button class="mini" data-detail="${esc(rowKey(r))}">Ver detalle</button><button class="mini" data-evidence="${esc(r.recordId)}">Evidencias</button><button class="mini" data-excel="${esc(rowKey(r))}">⇩ Excel</button></div></td></tr>`}
+function rowRecord(r){const ev=state.evidencesByRecord[r.recordId]||[];return `<tr><td><strong>${esc(dateOnly(r.recordDate)||'—')}</strong><span class="sub">${esc(r.recordStartTime||'—')} → ${esc(r.recordEndTime||'—')}</span><span class="sub">${esc(fmtDuration(r))}</span></td><td><strong>${esc(r.visitId||'—')}</strong></td><td><strong>${esc(r.recordId||'—')}</strong></td><td><span class="badge amber">Ítem ${Number(r.itemNumber||1)}</span></td><td>${esc(r.recordType||'Registro')}${srcOf(r)==='Importado'?'<br><span class="badge imp">Importado</span>':''}</td><td>${esc(r.dimension||'—')}</td><td>${esc(r.queObservo||'—')}</td><td>${esc(r.detailFinding||'—')}</td><td><strong>${esc(r.personName||r.campus||'—')}</strong><span class="sub">${esc([r.voiceMode,r.program,r.course,r.turn].filter(Boolean).join(' · '))}</span></td><td><span class="badge ${ev.length?'green':'gray'}">${Number(r.evidenceCount||0)} reg. / ${ev.length} en Drive</span></td><td><div class="actions"><button class="mini" data-detail="${esc(rowKey(r))}">Ver detalle</button><button class="mini" data-evidence="${esc(r.recordId)}">Evidencias</button><button class="mini" data-excel="${esc(rowKey(r))}">⇩ Excel</button></div></td></tr>`}
 function findRecord(key){const [id,item]=String(key||'').split('__');return state.records.find(r=>String(r.recordId)===id&&Number(r.itemNumber||1)===Number(item||1))||state.records.find(r=>String(r.recordId)===String(key))}
-function showDetail(r){if(!r)return;$('#detailSubtitle').textContent=[r.visitId,r.recordId,`Ítem ${Number(r.itemNumber||1)}`,dateOnly(r.recordDate),r.campus].filter(Boolean).join(' · ');const f=[['ID visita',r.visitId],['ID registro',r.recordId],['Ítem',r.itemNumber||1],['Fecha de registro',r.recordDate],['Tipo de registro',r.recordType],['Inicio registro',r.recordStartTime],['Cierre registro',r.recordEndTime],['Tiempo total',fmtDuration(r)],['Visitante',r.visitorName],['Correo visitante',r.visitorEmail],['Área',r.visitorArea],['Rol',r.visitorRole],['Sede',r.campus],['Modalidad',r.modality],['Dimensión',r.dimension],['¿Qué observaste?',r.queObservo],['Detalle del hallazgo',r.detailFinding],['Naturaleza',r.nature],['Modo voz',r.voiceMode],['Tipo persona',r.personType],['Persona',r.personName],['Cantidad entrevistados',r.groupInterviewCount],['Facultad',r.faculty],['Carrera',r.program],['Curso',r.course],['Ciclo',r.cycle],['Turno',r.turn],['Aula / sección',r.section],['Cantidad estudiantes',r.studentCount],['Espacio',r.space],['Referencia',r.reference],['Acción posterior',r.followup],['Área derivación',r.derivationArea],['Correos derivación',r.derivationEmail],['Estado derivación',r.derivationStatus],['Transcripción',r.transcript]].filter(x=>String(x[1]??'').trim()!=='');$('#detailGrid').innerHTML=f.map(([k,v])=>`<div class="detail ${['Detalle del hallazgo','Transcripción','¿Qué observaste?'].includes(k)?'wide':''}"><small>${esc(k)}</small><strong>${esc(v)}</strong></div>`).join('');$('#itemsDetail').innerHTML='';openModal('detailModal')}
+function showDetail(r){if(!r)return;$('#detailSubtitle').textContent=[r.visitId,r.recordId,`Ítem ${Number(r.itemNumber||1)}`,dateOnly(r.recordDate),r.campus].filter(Boolean).join(' · ');const f=[['ID visita',r.visitId],['ID registro',r.recordId],['Ítem',r.itemNumber||1],['Fecha de registro',r.recordDate],['Tipo de registro',r.recordType],['Inicio registro',r.recordStartTime],['Cierre registro',r.recordEndTime],['Tiempo total',fmtDuration(r)],['Visitante',r.visitorName],['Correo visitante',r.visitorEmail],['Área',r.visitorArea],['Rol',r.visitorRole],['Sede',r.campus],['Modalidad',r.modality],['Dimensión',r.dimension],['¿Qué observaste?',r.queObservo],['Detalle del hallazgo',r.detailFinding],['Naturaleza',r.nature],['Modo voz',r.voiceMode],['Tipo persona',r.personType],['Persona',r.personName],['Cantidad entrevistados',r.groupInterviewCount],['Facultad',r.faculty],['Carrera',r.program],['Curso',r.course],['Ciclo',r.cycle],['Turno',r.turn],['Aula / sección',r.section],['Cantidad estudiantes',r.studentCount],['Espacio',r.space],['Referencia',r.reference],['Acción posterior',r.followup],['Área derivación',r.derivationArea],['Correos derivación',r.derivationEmail],['Estado derivación',r.derivationStatus],['Transcripción',r.transcript],['Origen',srcOf(r)],['Archivo importado',r.importFile],['Importado por',r.importedBy]].filter(x=>String(x[1]??'').trim()!=='');$('#detailGrid').innerHTML=f.map(([k,v])=>`<div class="detail ${['Detalle del hallazgo','Transcripción','¿Qué observaste?'].includes(k)?'wide':''}"><small>${esc(k)}</small><strong>${esc(v)}</strong></div>`).join('');$('#itemsDetail').innerHTML='';openModal('detailModal')}
 const evidenceCache={};
 async function evidenceBlob(ev){if(evidenceCache[ev.evidence_id])return evidenceCache[ev.evidence_id];const r=await api('getEvidence',{evidenceId:ev.evidence_id},120000);const bin=atob(r.base64||''),bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);const blob=new Blob([bytes],{type:r.type||ev.type||'application/octet-stream'});evidenceCache[ev.evidence_id]={blob,name:r.name||ev.name||'evidencia'};return evidenceCache[ev.evidence_id]}
 async function evidenceAction(ev,download,btn){if(!ev)return;const o=btn.textContent;btn.disabled=true;btn.textContent='Cargando…';const win=download?null:window.open('','_blank');try{const {blob,name}=await evidenceBlob(ev);const url=URL.createObjectURL(blob);if(download){const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove()}else if(win){win.location.href=url}else{window.open(url,'_blank')}setTimeout(()=>URL.revokeObjectURL(url),60000)}catch(e){if(win)win.close();alert('No se pudo abrir la evidencia: '+e.message)}finally{btn.disabled=false;btn.textContent=o}}
 function showEvidence(r){const list=state.evidencesByRecord[r.recordId]||[];$('#evidenceSubtitle').textContent=`${r.recordId} · ${list.length}/${Number(r.evidenceCount||list.length)} cargada(s)`;const b=$('#evidenceBody');if(!list.length){b.innerHTML='<div class="empty">El registro indica evidencias, pero todavía no hay archivos sincronizados en Drive para este ID.</div>';openModal('evidenceModal');return}b.innerHTML=list.map((e,i)=>`<div class="ev"><div><strong>${esc(e.name||`Evidencia ${i+1}`)}</strong><span>${esc(e.type||'Archivo')} · ${Math.max(1,Math.round(Number(e.size||0)/1024))} KB</span></div><div class="actions"><button class="mini" data-view-ev="${esc(e.evidence_id)}">Ver</button><button class="mini" data-down-ev="${esc(e.evidence_id)}">Descargar</button></div></div>`).join('');openModal('evidenceModal')}
 function evById(id){for(const arr of Object.values(state.evidencesByRecord)){const x=arr.find(e=>String(e.evidence_id)===String(id));if(x)return x}}
 function scalar(v){return typeof v==='object'?JSON.stringify(v):v??''}
-function recordRows(r){return [['Campo','Valor'],['ID_VISITA',r.visitId],['ID_REGISTRO',r.recordId],['ITEM',r.itemNumber||1],['FECHA_REGISTRO',r.recordDate],['HORA_INICIO_REGISTRO',r.recordStartTime],['HORA_CIERRE_REGISTRO',r.recordEndTime],['TIEMPO_TOTAL_SEGUNDOS',r.recordDurationSeconds],['TIEMPO_TOTAL_MINUTOS',r.recordDurationMinutes],['VISITANTE_NOMBRE',r.visitorName],['VISITANTE_CORREO',r.visitorEmail],['AREA_VISITANTE',r.visitorArea],['ROL_VISITANTE',r.visitorRole],['SEDE',r.campus],['MODALIDAD',r.modality],['PLATAFORMA_VIRTUAL',r.platform],['SESION_VIRTUAL',r.virtualSession],['DIRECCION',r.address],['LATITUD',r.latitude],['LONGITUD',r.longitude],['PRECISION_M',r.accuracyM],['TIPO_REGISTRO',r.recordType],['DIMENSION',r.dimension],['QUE_OBSERVO',r.queObservo],['DETALLE_HALLAZGO',r.detailFinding],['NATURALEZA',r.nature],['TIPO_PERSONA',r.personType],['MODO_VOZ',r.voiceMode],['PERSONA_NOMBRE',r.personName],['CANTIDAD_ENTREVISTADOS',r.groupInterviewCount],['FACULTAD',r.faculty],['PROGRAMA_CARRERA',r.program],['CURSO_ASIGNATURA',r.course],['CICLO',r.cycle],['TURNO',r.turn],['AULA_SECCION',r.section],['CANTIDAD_ESTUDIANTES',r.studentCount],['ESPACIO_AMBIENTE',r.space],['CONTEXTO_REFERENCIA',r.reference],['RECURRENCIA',r.recurrence],['ACCION_POSTERIOR',r.followup],['AREA_DERIVACION',r.derivationArea],['PERSONA_DERIVACION',r.derivationName],['CORREO_DERIVACION',r.derivationEmail],['CORREO_DERIVACION_PRINCIPAL',r.derivationEmailPrimary],['CORREO_DERIVACION_ADICIONAL_1',r.derivationEmailCc1],['CORREO_DERIVACION_ADICIONAL_2',r.derivationEmailCc2],['ESTADO_DERIVACION',r.derivationStatus],['FECHA_DERIVACION',r.derivationAt],['TRANSCRIPCION',r.transcript],['N_EVIDENCIAS',r.evidenceCount],['NOMBRES_EVIDENCIAS',r.evidenceNames],['TIPOS_EVIDENCIAS',r.evidenceTypes],['ESTADO_EVIDENCIAS',r.evidenceSyncStatus],['ESTADO_REGISTRO',r.recordStatus]]}
+function recordRows(r){return [['Campo','Valor'],['ID_VISITA',r.visitId],['ID_REGISTRO',r.recordId],['ITEM',r.itemNumber||1],['FECHA_REGISTRO',r.recordDate],['HORA_INICIO_REGISTRO',r.recordStartTime],['HORA_CIERRE_REGISTRO',r.recordEndTime],['TIEMPO_TOTAL_SEGUNDOS',r.recordDurationSeconds],['TIEMPO_TOTAL_MINUTOS',r.recordDurationMinutes],['VISITANTE_NOMBRE',r.visitorName],['VISITANTE_CORREO',r.visitorEmail],['AREA_VISITANTE',r.visitorArea],['ROL_VISITANTE',r.visitorRole],['SEDE',r.campus],['MODALIDAD',r.modality],['PLATAFORMA_VIRTUAL',r.platform],['SESION_VIRTUAL',r.virtualSession],['DIRECCION',r.address],['LATITUD',r.latitude],['LONGITUD',r.longitude],['PRECISION_M',r.accuracyM],['TIPO_REGISTRO',r.recordType],['DIMENSION',r.dimension],['QUE_OBSERVO',r.queObservo],['DETALLE_HALLAZGO',r.detailFinding],['NATURALEZA',r.nature],['TIPO_PERSONA',r.personType],['MODO_VOZ',r.voiceMode],['PERSONA_NOMBRE',r.personName],['CANTIDAD_ENTREVISTADOS',r.groupInterviewCount],['FACULTAD',r.faculty],['PROGRAMA_CARRERA',r.program],['CURSO_ASIGNATURA',r.course],['CICLO',r.cycle],['TURNO',r.turn],['AULA_SECCION',r.section],['CANTIDAD_ESTUDIANTES',r.studentCount],['ESPACIO_AMBIENTE',r.space],['CONTEXTO_REFERENCIA',r.reference],['RECURRENCIA',r.recurrence],['ACCION_POSTERIOR',r.followup],['AREA_DERIVACION',r.derivationArea],['PERSONA_DERIVACION',r.derivationName],['CORREO_DERIVACION',r.derivationEmail],['CORREO_DERIVACION_PRINCIPAL',r.derivationEmailPrimary],['CORREO_DERIVACION_ADICIONAL_1',r.derivationEmailCc1],['CORREO_DERIVACION_ADICIONAL_2',r.derivationEmailCc2],['ESTADO_DERIVACION',r.derivationStatus],['FECHA_DERIVACION',r.derivationAt],['TRANSCRIPCION',r.transcript],['N_EVIDENCIAS',r.evidenceCount],['NOMBRES_EVIDENCIAS',r.evidenceNames],['TIPOS_EVIDENCIAS',r.evidenceTypes],['ESTADO_EVIDENCIAS',r.evidenceSyncStatus],['ESTADO_REGISTRO',r.recordStatus],['ORIGEN',srcOf(r)],['ARCHIVO_IMPORTADO',r.importFile]]}
 function downloadTable(rows,name){const html='<table>'+rows.map(row=>'<tr>'+row.map(c=>`<td>${esc(scalar(c))}</td>`).join('')+'</tr>').join('')+'</table>';const blob=new Blob(['\ufeff','<html><meta charset="UTF-8"><body>'+html+'</body></html>'],{type:'application/vnd.ms-excel'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 function downloadRecord(r){downloadTable(recordRows(r),`Ruta_SISE_${String(r.recordId||'registro').replace(/[^A-Za-z0-9_-]/g,'_')}.xls`)}
 function downloadAll(){const keep=state.filtered,view=state.view;state.filtered=view==='visits'?state.visits:state.records;try{downloadFiltered(view==='visits'?'Ruta_SISE_Visitas_General.xls':'Ruta_SISE_Registros_General.xls')}finally{state.filtered=keep}}
-function downloadFiltered(fileName){if(state.view==='visits'){const h=['ID_VISITA','EVENTO','FECHA','HORA','VISITANTE','CORREO','AREA','ROL','SEDE','MODALIDAD','DURACION_MINUTOS'];downloadTable([h,...state.filtered.map(v=>[v.visitId,v.systemEvent,dateOnly(v.visitDate),v.recordTime,v.visitorName,v.visitorEmail,v.visitorArea,v.visitorRole,v.campus,v.modality,v.durationMinutes])],(typeof fileName==='string'&&fileName)||'Ruta_SISE_Visitas_Filtradas.xls');return}const h=['ID_VISITA','ID_REGISTRO','ITEM','FECHA_REGISTRO','HORA_INICIO_REGISTRO','HORA_CIERRE_REGISTRO','TIEMPO_TOTAL_SEGUNDOS','TIEMPO_TOTAL_MINUTOS','VISITANTE_NOMBRE','VISITANTE_CORREO','AREA_VISITANTE','ROL_VISITANTE','SEDE','MODALIDAD','TIPO_REGISTRO','DIMENSION','QUE_OBSERVO','DETALLE_HALLAZGO','NATURALEZA','TIPO_PERSONA','MODO_VOZ','PERSONA_NOMBRE','CANTIDAD_ENTREVISTADOS','FACULTAD','PROGRAMA_CARRERA','CURSO_ASIGNATURA','CICLO','TURNO','AULA_SECCION','CANTIDAD_ESTUDIANTES','RECURRENCIA','ACCION_POSTERIOR','AREA_DERIVACION','ESTADO_DERIVACION','N_EVIDENCIAS','ESTADO_EVIDENCIAS'];downloadTable([h,...state.filtered.map(r=>[r.visitId,r.recordId,r.itemNumber||1,r.recordDate,r.recordStartTime,r.recordEndTime,r.recordDurationSeconds,r.recordDurationMinutes,r.visitorName,r.visitorEmail,r.visitorArea,r.visitorRole,r.campus,r.modality,r.recordType,r.dimension,r.queObservo,r.detailFinding,r.nature,r.personType,r.voiceMode,r.personName,r.groupInterviewCount,r.faculty,r.program,r.course,r.cycle,r.turn,r.section,r.studentCount,r.recurrence,r.followup,r.derivationArea,r.derivationStatus,r.evidenceCount,r.evidenceSyncStatus])],(typeof fileName==='string'&&fileName)||'Ruta_SISE_Registros_Items_Filtrados.xls')}
-function switchView(view){state.view=view;$('#navRecords').classList.toggle('active',view==='records');$('#navVisits').classList.toggle('active',view==='visits');$('#recordFilters').querySelectorAll('.control').forEach(x=>x.style.display='');const recordOnly=['facultyFilter','typeFilter','dimensionFilter','observedFilter','natureFilter','personTypeFilter','voiceModeFilter'];recordOnly.forEach(id=>{$('#'+id).closest('.control').style.display=view==='records'?'':'none'});$('#viewTitle').textContent=view==='records'?'Registros de campo':'Inicio y cierre de visitas';$('#viewSubtitle').textContent=view==='records'?'Los registros cerrados se muestran separados del inicio y cierre de visita. Cada registro conserva sus tiempos, ítems, clasificación y evidencias.':'Esta vista contiene únicamente los eventos INICIO_VISITA y CIERRE_VISITA, sin mezclar hallazgos ni ítems.';$('#tableTitle').textContent=view==='records'?'Registros':'Eventos de visita';applyFilters()}
-$('#refreshBtn').addEventListener('click',loadAll);$('#downloadFiltered').addEventListener('click',downloadFiltered);$('#navRecords').addEventListener('click',()=>switchView('records'));$('#navVisits').addEventListener('click',()=>switchView('visits'));$('#clearFilters').addEventListener('click',()=>{$$('#recordFilters input').forEach(x=>x.value='');$$('#recordFilters select').forEach(x=>x.value='');applyFilters()});['searchInput','campusFilter','typeFilter','observedFilter','areaFilter','roleFilter','modalityFilter','natureFilter','personTypeFilter','voiceModeFilter','facultyFilter','dateFilter'].forEach(id=>$('#'+id).addEventListener(id==='searchInput'?'input':'change',applyFilters));$('#dimensionFilter').addEventListener('change',()=>{refreshObservedFilter();applyFilters()});document.addEventListener('click',e=>{const d=e.target.closest('[data-detail]');if(d)showDetail(findRecord(d.dataset.detail));const ev=e.target.closest('[data-evidence]');if(ev)showEvidence(state.records.find(r=>String(r.recordId)===String(ev.dataset.evidence)));const ex=e.target.closest('[data-excel]');if(ex)downloadRecord(findRecord(ex.dataset.excel));const v=e.target.closest('[data-view-ev]');if(v)evidenceAction(evById(v.dataset.viewEv),false,v);const dl=e.target.closest('[data-down-ev]');if(dl)evidenceAction(evById(dl.dataset.downEv),true,dl);const c=e.target.closest('[data-close]');if(c)closeModal(c.dataset.close)});$$('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
+function downloadFiltered(fileName){if(state.view==='visits'){const h=['ID_VISITA','EVENTO','FECHA','HORA','VISITANTE','CORREO','AREA','ROL','SEDE','MODALIDAD','DURACION_MINUTOS'];downloadTable([h,...state.filtered.map(v=>[v.visitId,v.systemEvent,dateOnly(v.visitDate),v.recordTime,v.visitorName,v.visitorEmail,v.visitorArea,v.visitorRole,v.campus,v.modality,v.durationMinutes])],(typeof fileName==='string'&&fileName)||'Ruta_SISE_Visitas_Filtradas.xls');return}const h=['ID_VISITA','ID_REGISTRO','ITEM','FECHA_REGISTRO','HORA_INICIO_REGISTRO','HORA_CIERRE_REGISTRO','TIEMPO_TOTAL_SEGUNDOS','TIEMPO_TOTAL_MINUTOS','VISITANTE_NOMBRE','VISITANTE_CORREO','AREA_VISITANTE','ROL_VISITANTE','SEDE','MODALIDAD','TIPO_REGISTRO','DIMENSION','QUE_OBSERVO','DETALLE_HALLAZGO','NATURALEZA','TIPO_PERSONA','MODO_VOZ','PERSONA_NOMBRE','CANTIDAD_ENTREVISTADOS','FACULTAD','PROGRAMA_CARRERA','CURSO_ASIGNATURA','CICLO','TURNO','AULA_SECCION','CANTIDAD_ESTUDIANTES','RECURRENCIA','ACCION_POSTERIOR','AREA_DERIVACION','ESTADO_DERIVACION','N_EVIDENCIAS','ESTADO_EVIDENCIAS','ORIGEN'];downloadTable([h,...state.filtered.map(r=>[r.visitId,r.recordId,r.itemNumber||1,r.recordDate,r.recordStartTime,r.recordEndTime,r.recordDurationSeconds,r.recordDurationMinutes,r.visitorName,r.visitorEmail,r.visitorArea,r.visitorRole,r.campus,r.modality,r.recordType,r.dimension,r.queObservo,r.detailFinding,r.nature,r.personType,r.voiceMode,r.personName,r.groupInterviewCount,r.faculty,r.program,r.course,r.cycle,r.turn,r.section,r.studentCount,r.recurrence,r.followup,r.derivationArea,r.derivationStatus,r.evidenceCount,r.evidenceSyncStatus,srcOf(r)])],(typeof fileName==='string'&&fileName)||'Ruta_SISE_Registros_Items_Filtrados.xls')}
+function switchView(view){state.view=view;$('#navDashboard').classList.toggle('active',view==='dashboard');$('#navRecords').classList.toggle('active',view==='records');$('#navVisits').classList.toggle('active',view==='visits');$('#recordFilters').querySelectorAll('.control').forEach(x=>x.style.display='');const recordOnly=['sourceFilter','facultyFilter','typeFilter','dimensionFilter','observedFilter','natureFilter','personTypeFilter','voiceModeFilter'];recordOnly.forEach(id=>{$('#'+id).closest('.control').style.display=view==='visits'?'none':''});$('#kpiRow').classList.toggle('hidden',view==='dashboard');$('#tablePanel').classList.toggle('hidden',view==='dashboard');$('#dashboard').classList.toggle('hidden',view!=='dashboard');const T={dashboard:['Tablero de resultados','Indicadores de cobertura, hallazgos y gestión calculados sobre los registros cerrados. Todos los gráficos responden a los filtros de arriba.'],records:['Registros de campo','Los registros cerrados se muestran separados del inicio y cierre de visita. Cada registro conserva sus tiempos, ítems, clasificación y evidencias.'],visits:['Inicio y cierre de visitas','Esta vista contiene únicamente los eventos INICIO_VISITA y CIERRE_VISITA, sin mezclar hallazgos ni ítems.']}[view];$('#viewTitle').textContent=T[0];$('#viewSubtitle').textContent=T[1];$('#tableTitle').textContent=view==='visits'?'Eventos de visita':'Registros';applyFilters()}
+$('#refreshBtn').addEventListener('click',loadAll);$('#downloadFiltered').addEventListener('click',downloadFiltered);$('#navDashboard').addEventListener('click',()=>switchView('dashboard'));$('#navRecords').addEventListener('click',()=>switchView('records'));$('#navVisits').addEventListener('click',()=>switchView('visits'));$('#clearFilters').addEventListener('click',()=>{$$('#recordFilters input').forEach(x=>x.value='');$$('#recordFilters select').forEach(x=>x.value='');applyFilters()});['searchInput','campusFilter','typeFilter','observedFilter','areaFilter','roleFilter','modalityFilter','natureFilter','personTypeFilter','voiceModeFilter','facultyFilter','sourceFilter','dateFilter'].forEach(id=>$('#'+id).addEventListener(id==='searchInput'?'input':'change',applyFilters));$('#dimensionFilter').addEventListener('change',()=>{refreshObservedFilter();applyFilters()});document.addEventListener('click',e=>{const d=e.target.closest('[data-detail]');if(d)showDetail(findRecord(d.dataset.detail));const ev=e.target.closest('[data-evidence]');if(ev)showEvidence(state.records.find(r=>String(r.recordId)===String(ev.dataset.evidence)));const ex=e.target.closest('[data-excel]');if(ex)downloadRecord(findRecord(ex.dataset.excel));const v=e.target.closest('[data-view-ev]');if(v)evidenceAction(evById(v.dataset.viewEv),false,v);const dl=e.target.closest('[data-down-ev]');if(dl)evidenceAction(evById(dl.dataset.downEv),true,dl);const c=e.target.closest('[data-close]');if(c)closeModal(c.dataset.close)});$$('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
 $('#downloadWorkbook').addEventListener('click',downloadAll);
+/* =====================================================================
+   TABLERO DE RESULTADOS · Ruta SISE v70
+   Gráficos SVG propios (sin librerías externas). Calculados sobre
+   state.filtered (ítems) y state.visits, por lo que respetan los filtros.
+   ===================================================================== */
+const DASH={heat:'crit'};
+const NAT=['Alerta','Brecha','Oportunidad','Fortaleza'];
+// Divergente validado: rojo (críticos) <-> azul (positivos). Brecha/Oportunidad = pasos internos.
+const NAT_COLOR={Alerta:'#b42335',Brecha:'#ec8378',Oportunidad:'#6da7ec',Fortaleza:'#1c5cab'};
+const RED_RAMP=['#fdeceb','#f9cfca','#f2a59c','#e8766b','#c8423f','#8e1a29'];
+const BLUE_RAMP=['#eef5fd','#cde2fb','#9ec5f4','#6da7ec','#3987e5','#1c5cab'];
+const RECUR=['Nuevo','Reiterado en esta sede','Visto en otras sedes'];
+const RECUR_COLOR={'Nuevo':'#ec8378','Reiterado en esta sede':'#c8423f','Visto en otras sedes':'#8e1a29'};
+const INK='#3f3a3c',MUTED='#64748b',GRID='#e9edf2',SOFT='#d5d9df',TARGET=80;
+const CRIT=new Set(['Alerta','Brecha']);
+const ACTION=new Set(['Requiere seguimiento','Escalar como incidencia']);
+const CAMPUS_NET=FILTER_CATALOGS.campuses.filter(c=>c!=='Otra sede SISE');
+const ICON_WARN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5M12 18h.01"/></svg>';
+const ICON_OK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>';
+
+const natOf=r=>String(r.nature||'').split(/\s*\|\s*/)[0].trim();
+const isCrit=r=>CRIT.has(natOf(r));
+const pct=(a,b)=>b?Math.round(a/b*1000)/10:0;
+const fmtP=v=>`${String(Math.round(v*10)/10).replace('.',',')}%`;
+const nfmt=n=>Number(n||0).toLocaleString('de-DE',{maximumFractionDigits:1});
+const trunc=(s,n)=>{s=String(s||'');return s.length>n?s.slice(0,Math.max(1,n-1))+'…':s};
+const tipAttr=t=>`data-tip="${esc(t)}"`;
+const dimShort=d=>String(d||'').replace(/^D(\d+)\s*·\s*/,'D$1 · ');
+function median(a){if(!a.length)return 0;const s=[...a].sort((x,y)=>x-y),m=Math.floor(s.length/2);return s.length%2?s[m]:(s[m-1]+s[m])/2}
+function fmtSecs(s){s=Math.round(s||0);if(!s)return '—';const m=Math.floor(s/60),x=s%60;return m?`${m} min ${String(x).padStart(2,'0')} s`:`${x} s`}
+function niceScale(v,ticks=4){if(!(v>0))return {max:1,step:1};const raw=v/ticks,mag=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/mag;let step=(n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*mag;if(step<1)step=1;return {max:Math.ceil(v/step)*step,step}}
+function peopleOf(rec){const t=rec.recordType;if(t==='Voz del estudiante')return rec.voiceMode==='Grupal'?Math.max(2,Number(rec.groupInterviewCount||0)):1;if(t==='Voz del docente')return 1;return 0}
+function hasDerivation(r){return !!(String(r.derivationArea||'').trim()||String(r.derivationEmail||'').trim())}
+function mgmtState(r){
+  if(String(r.derivationStatus||'')==='Correo enviado')return 'Derivado';
+  if(hasDerivation(r))return 'Derivación pendiente';
+  if(ACTION.has(r.followup))return r.followup==='Escalar como incidencia'?'Escalado sin derivar':'En seguimiento';
+  return 'Sin acción definida';
+}
+function dashVisits(){const camp=$('#campusFilter').value,area=$('#areaFilter').value,role=$('#roleFilter').value,mod=$('#modalityFilter').value,date=$('#dateFilter').value;return state.visits.filter(v=>(!camp||v.campus===camp)&&(!area||v.visitorArea===area)&&(!role||v.visitorRole===role)&&(!mod||v.modality===mod)&&(!date||dateOnly(v.visitDate)===date))}
+
+/* ---------- piezas comunes ---------- */
+function T(x,y,t,o={}){return `<text x="${x.toFixed?x.toFixed(1):x}" y="${y.toFixed?y.toFixed(1):y}" font-size="${o.size||12}" fill="${o.fill||MUTED}" text-anchor="${o.anchor||'start'}" font-weight="${o.weight||400}"${o.base?` dominant-baseline="${o.base}"`:''}>${esc(t)}</text>`}
+function R(x,y,w,h,fill,o={}){if(w<=0||h<=0)return '';return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" rx="${o.rx??3}" fill="${fill}"${o.stroke?` stroke="${o.stroke}" stroke-width="${o.sw||2}"`:''}${o.op?` fill-opacity="${o.op}"`:''}${o.tip?' '+tipAttr(o.tip):''}/>`}
+function svgWrap(w,h,inner,label){return `<svg class="dash-svg" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="${esc(label||'')}">${inner}</svg>`}
+function legendHtml(items){return `<div class="dash-legend">${items.map(([l,c])=>`<span><i style="background:${c}"></i>${esc(l)}</span>`).join('')}</div>`}
+function natLegend(){return legendHtml(NAT.map(n=>[n,NAT_COLOR[n]]))}
+function dataTable(head,rows){if(!rows.length)return '';return `<details class="dash-data"><summary>Ver datos</summary><div class="dash-table-wrap"><table><thead><tr>${head.map(h=>`<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></details>`}
+function emptyChart(msg){return `<div class="dash-empty">${esc(msg||'Sin datos con los filtros actuales.')}</div>`}
+function card(id,title,why,opts={}){return `<article class="dash-card${opts.wide?' wide':''}"><header><h3>${esc(title)}</h3>${opts.tools||''}</header><p class="dash-why">${why}</p><div class="dash-plot" id="${id}"></div></article>`}
+function natBadge(n){const c=String(n||'').toLowerCase();return `<span class="nat-badge ${c}"><i style="background:${NAT_COLOR[n]||SOFT}"></i>${esc(n||'—')}</span>`}
+
+/* ---------- datos agregados ---------- */
+function dashData(){
+  const rows=state.filtered||[],recs=[...new Map(rows.map(r=>[r.recordId,r])).values()],visits=dashVisits(),crit=rows.filter(isCrit);
+  return {rows,recs,visits,crit};
+}
+
+/* ---------- KPIs ---------- */
+function kpiTile(label,value,sub,flag){return `<div class="dash-kpi"><small>${esc(label)}</small><strong>${value}</strong><span>${sub}</span>${flag?`<em class="dash-flag ${flag.cls}">${flag.cls==='warn'?ICON_WARN:ICON_OK}${esc(flag.text)}</em>`:''}</div>`}
+function kpisHtml(D){
+  const {rows,recs,visits,crit}=D;
+  const visitIds=new Set([...visits.map(v=>v.visitId),...rows.map(r=>r.visitId)].filter(Boolean));
+  const closeEv=[...new Map(visits.filter(v=>String(v.systemEvent||'').toUpperCase().includes('CIERRE')).map(v=>[v.visitId,v])).values()];
+  const hours=closeEv.reduce((n,v)=>n+Number(v.durationMinutes||0),0)/60;
+  const est=recs.filter(r=>r.recordType==='Voz del estudiante').reduce((n,r)=>n+peopleOf(r),0);
+  const doc=recs.filter(r=>r.recordType==='Voz del docente').length;
+  const classes=recs.filter(r=>r.recordType==='Observar clase');
+  const present=classes.reduce((n,r)=>n+Number(r.studentCount||0),0);
+  const campuses=new Set(rows.map(r=>r.campus).filter(c=>CAMPUS_NET.includes(c)));
+  const managed=crit.filter(r=>mgmtState(r)!=='Sin acción definida').length;
+  const alerts=crit.filter(r=>natOf(r)==='Alerta').length;
+  const withEv=recs.filter(r=>Number(r.evidenceCount||0)>0).length;
+  const medSecs=median(recs.map(r=>Number(r.recordDurationSeconds||0)).filter(x=>x>0));
+  const pMan=pct(managed,crit.length),pEv=pct(withEv,recs.length);
+  return `<div class="dash-kpis">
+    ${kpiTile('Visitas realizadas',nfmt(visitIds.size),hours?`${String(Math.round(hours*10)/10).replace('.',',')} h en campo`:'Horas en campo: al cerrar visitas')}
+    ${kpiTile('Registros cerrados',nfmt(recs.length),`${nfmt(rows.length)} hallazgos · ${recs.length?String(Math.round(rows.length/recs.length*10)/10).replace('.',','):0} por registro`)}
+    ${kpiTile('Personas escuchadas',nfmt(est+doc),`${nfmt(est)} estudiantes · ${nfmt(doc)} docentes`)}
+    ${kpiTile('Clases observadas',nfmt(classes.length),`${nfmt(present)} estudiantes presentes`)}
+    ${kpiTile('Cobertura de sedes',`${campuses.size}/${CAMPUS_NET.length}`,`${fmtP(pct(campuses.size,CAMPUS_NET.length))} de la red visitada`)}
+    ${kpiTile('Hallazgos críticos',fmtP(pct(crit.length,rows.length)),`${nfmt(alerts)} alertas · ${nfmt(crit.length-alerts)} brechas`)}
+    ${kpiTile('Críticos con acción',crit.length?fmtP(pMan):'—',crit.length?`${nfmt(crit.length-managed)} sin acción definida`:'Sin hallazgos críticos',crit.length?(pMan>=TARGET?{cls:'good',text:'Meta 80% cumplida'}:{cls:'warn',text:'Debajo de la meta 80%'}):null)}
+    ${kpiTile('Registros con evidencia',recs.length?fmtP(pEv):'—',`Tiempo mediano por registro: ${fmtSecs(medSecs)}`)}
+  </div>`;
+}
+
+/* ---------- 1. Evolución (columnas divergentes) ---------- */
+function chartTrend(W,D){
+  const rows=D.rows.filter(r=>dateOnly(r.recordDate));
+  if(!rows.length)return emptyChart();
+  const ymd=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  const dates=rows.map(r=>dateOnly(r.recordDate)).sort(),d0=new Date(dates[0]+'T00:00:00'),d1=new Date(dates[dates.length-1]+'T00:00:00'),span=Math.round((d1-d0)/864e5);
+  const mode=span<=35?'day':span<=364?'week':'month';
+  const MES=['ene','feb','mar','abr','may','jun','jul','ago','set','oct','nov','dic'];
+  const keyOf=ds=>{const d=new Date(ds+'T00:00:00');if(mode==='day')return ds;if(mode==='week'){d.setDate(d.getDate()-((d.getDay()+6)%7));return ymd(d)}return ds.slice(0,7)};
+  const labelOf=k=>{if(mode==='month'){const [y,m]=k.split('-');return `${MES[+m-1]} ${y.slice(2)}`}const [y,m,dd]=k.split('-');return (mode==='week'?'Sem ':'')+`${dd}/${m}`};
+  const keys=[];{const c=new Date(keyOf(dates[0])+(mode==='month'?'-01':'')+'T00:00:00'),end=keyOf(dates[dates.length-1]);for(let g=0;g<400;g++){const k=mode==='month'?ymd(c).slice(0,7):ymd(c);keys.push(k);if(k===end)break;if(mode==='day')c.setDate(c.getDate()+1);else if(mode==='week')c.setDate(c.getDate()+7);else c.setMonth(c.getMonth()+1)}}
+  const M=new Map(keys.map(k=>[k,{Alerta:0,Brecha:0,Oportunidad:0,Fortaleza:0}]));
+  rows.forEach(r=>{const o=M.get(keyOf(dateOnly(r.recordDate)));const n=natOf(r);if(o&&n in o)o[n]++});
+  const per=keys.map(k=>({k,...M.get(k)}));
+  const pos=Math.max(0,...per.map(p=>p.Oportunidad+p.Fortaleza)),neg=Math.max(0,...per.map(p=>p.Alerta+p.Brecha));
+  const sc=niceScale(Math.max(pos,neg,1),3),top=pos>0?sc.max:0,bot=neg>0?sc.max:0;
+  const H=290,ml=42,mr=10,mt=24,mb=34,pw=W-ml-mr,ph=H-mt-mb,unit=ph/((top+bot)||1),zero=mt+top*unit;
+  let g='';
+  for(let v=-bot;v<=top;v+=sc.step){const y=zero-v*unit;g+=`<line x1="${ml}" x2="${W-mr}" y1="${y}" y2="${y}" stroke="${v===0?'#94a3b8':GRID}" stroke-width="${v===0?1.2:1}"/>`+T(ml-6,y+4,Math.abs(v),{anchor:'end',size:11})}
+  if(top)g+=T(ml+4,mt-8,'Fortalezas y oportunidades',{size:11,fill:'#1c5cab',weight:700});
+  const slot=pw/per.length,bw=Math.min(34,Math.max(4,slot*.62)),every=Math.max(1,Math.ceil(per.length/Math.max(1,Math.floor(pw/64))));
+  per.forEach((p,i)=>{
+    const x=ml+i*slot+(slot-bw)/2,lab=labelOf(p.k),tot=NAT.reduce((n,k)=>n+p[k],0);
+    g+=`<rect x="${(ml+i*slot).toFixed(1)}" y="${mt}" width="${slot.toFixed(1)}" height="${ph}" fill="transparent" ${tipAttr(`${lab}\nTotal: ${tot} hallazgos\nAlertas ${p.Alerta} · Brechas ${p.Brecha}\nOportunidades ${p.Oportunidad} · Fortalezas ${p.Fortaleza}`)}/>`;
+    let y=zero;[['Oportunidad',1],['Fortaleza',1]].forEach(([n])=>{const h=p[n]*unit;if(h>0){g+=R(x,y-h+1,bw,Math.max(1,h-2),NAT_COLOR[n],{rx:2,tip:`${lab}\n${n}: ${p[n]}`});y-=h}});
+    y=zero;[['Brecha'],['Alerta']].forEach(([n])=>{const h=p[n]*unit;if(h>0){g+=R(x,y+1,bw,Math.max(1,h-2),NAT_COLOR[n],{rx:2,tip:`${lab}\n${n}: ${p[n]}`});y+=h}});
+    if(i%every===0)g+=T(ml+i*slot+slot/2,H-mb+18,lab,{anchor:'middle',size:11});
+  });
+  const label=`Evolución por ${mode==='day'?'día':mode==='week'?'semana':'mes'}`;
+  const tbl=dataTable(['Periodo','Alertas','Brechas','Oportunidades','Fortalezas','Total'],per.filter(p=>NAT.some(n=>p[n])).map(p=>[labelOf(p.k),p.Alerta,p.Brecha,p.Oportunidad,p.Fortaleza,NAT.reduce((n,k)=>n+p[k],0)]));
+  return natLegend()+svgWrap(W,H,g+(bot?T(ml+4,H-mb-6,'Alertas y brechas',{size:11,fill:'#b42335',weight:700}):''),label)+`<div class="dash-note">Agrupado por ${mode==='day'?'día':mode==='week'?'semana (lunes a domingo)':'mes'}. Arriba del eje: hallazgos positivos; abajo: críticos. Una barra inferior que crece semana a semana es una señal temprana.</div>`+tbl;
+}
+
+/* ---------- 2. Balance por dimensión (barras divergentes 100%) ---------- */
+function chartBalance(W,D){
+  const by=new Map();D.rows.forEach(r=>{const d=r.dimension;if(!d)return;if(!by.has(d))by.set(d,{d,Alerta:0,Brecha:0,Oportunidad:0,Fortaleza:0,n:0});const o=by.get(d),n=natOf(r);if(n in o){o[n]++;o.n++}});
+  const list=[...by.values()].filter(o=>o.n).sort((a,b)=>((b.Alerta+b.Brecha)/b.n)-((a.Alerta+a.Brecha)/a.n)||b.n-a.n);
+  if(!list.length)return emptyChart();
+  const lw=Math.min(210,Math.max(120,W*.34)),rw=46,pw=W-lw-rw-8,cx=lw+pw/2,half=pw/2,rh=28,mt=26,H=mt+list.length*rh+6,chars=Math.floor(lw/6.6);
+  let g=T(cx-6,16,'← Críticos',{anchor:'end',size:11,fill:'#b42335',weight:700})+T(cx+6,16,'Positivos →',{size:11,fill:'#1c5cab',weight:700})+T(W-4,16,'n',{anchor:'end',size:11});
+  list.forEach((o,i)=>{
+    const y=mt+i*rh,bh=rh-10,s=k=>o[k]/o.n*half,critP=pct(o.Alerta+o.Brecha,o.n),posP=pct(o.Oportunidad+o.Fortaleza,o.n);
+    g+=`<g>${T(0,y+bh/2+4,trunc(dimShort(o.d),chars),{size:12,fill:INK})}<title>${esc(o.d)}</title></g>`;
+    let x=cx;[['Brecha'],['Alerta']].forEach(([k])=>{const w=s(k);if(w>0){g+=R(x-w+1,y,Math.max(1,w-2),bh,NAT_COLOR[k],{rx:2,tip:`${o.d}\n${k}: ${o[k]} (${fmtP(pct(o[k],o.n))})`});x-=w}});
+    if(critP){const tw=fmtP(critP).length*6.4+6;g+=x-tw<lw+4?T(x+4,y+bh/2+4,fmtP(critP),{size:11,fill:'#fff',weight:700}):T(x-4,y+bh/2+4,fmtP(critP),{anchor:'end',size:11,fill:INK})}
+    x=cx;[['Oportunidad'],['Fortaleza']].forEach(([k])=>{const w=s(k);if(w>0){g+=R(x+1,y,Math.max(1,w-2),bh,NAT_COLOR[k],{rx:2,tip:`${o.d}\n${k}: ${o[k]} (${fmtP(pct(o[k],o.n))})`});x+=w}});
+    if(posP){const tw=fmtP(posP).length*6.4+6;g+=x+tw>W-rw-4?T(x-4,y+bh/2+4,fmtP(posP),{anchor:'end',size:11,fill:'#fff',weight:700}):T(x+4,y+bh/2+4,fmtP(posP),{size:11,fill:INK})}
+    g+=T(W-4,y+bh/2+4,o.n,{anchor:'end',size:11,fill:INK,weight:700});
+  });
+  g+=`<line x1="${cx}" x2="${cx}" y1="${mt-6}" y2="${H-2}" stroke="#94a3b8"/>`;
+  return natLegend()+svgWrap(W,H,g,'Balance de naturaleza por dimensión')+dataTable(['Dimensión','Alertas','Brechas','Oportunidades','Fortalezas','% críticos','n'],list.map(o=>[o.d,o.Alerta,o.Brecha,o.Oportunidad,o.Fortaleza,fmtP(pct(o.Alerta+o.Brecha,o.n)),o.n]));
+}
+
+/* ---------- 3. Mapa de calor sede x dimensión ---------- */
+function chartHeat(W,D){
+  const dims=FILTER_CATALOGS.dimensions,critMode=DASH.heat==='crit',ramp=critMode?RED_RAMP:BLUE_RAMP;
+  const M=new Map();D.rows.forEach(r=>{if(!r.campus||!r.dimension)return;const k=r.campus;if(!M.has(k))M.set(k,{c:k,cells:{},tot:0,crit:0});const o=M.get(k),c=o.cells[r.dimension]||(o.cells[r.dimension]={all:0,crit:0,alert:0});c.all++;o.tot++;if(isCrit(r)){c.crit++;o.crit++;if(natOf(r)==='Alerta')c.alert++}});
+  const list=[...M.values()].sort((a,b)=>(critMode?b.crit-a.crit:b.tot-a.tot)||b.tot-a.tot);
+  if(!list.length)return emptyChart();
+  const val=c=>c?(critMode?c.crit:c.all):0,max=Math.max(1,...list.flatMap(o=>dims.map(d=>val(o.cells[d]))));
+  const lw=Math.min(170,Math.max(110,W*.24)),tw=44,cw=Math.max(30,(W-lw-tw)/dims.length),ch=30,mt=24,Wd=Math.max(W,lw+tw+cw*dims.length),H=mt+list.length*ch+4;
+  let g='';
+  dims.forEach((d,j)=>{g+=`<g ${tipAttr(d)}>${T(lw+j*cw+cw/2,16,'D'+(j+1),{anchor:'middle',size:11,fill:INK,weight:700})}<rect x="${lw+j*cw}" y="0" width="${cw}" height="22" fill="transparent"/></g>`});
+  g+=T(lw+dims.length*cw+tw-4,16,'Total',{anchor:'end',size:11,fill:INK,weight:700});
+  list.forEach((o,i)=>{
+    const y=mt+i*ch;g+=T(0,y+ch/2+3,trunc(o.c,Math.floor(lw/6.8)),{size:12,fill:INK});
+    dims.forEach((d,j)=>{const c=o.cells[d],v=val(c),idx=v?Math.max(1,Math.min(5,Math.ceil(v/max*5))):0,fill=v?ramp[idx]:'#f8fafc';
+      g+=R(lw+j*cw+1,y+1,cw-2,ch-2,fill,{rx:3,tip:`${o.c} · ${d}\nHallazgos: ${c?.all||0}\nCríticos: ${c?.crit||0}${c?.all?` (${fmtP(pct(c.crit,c.all))})`:''}\nAlertas: ${c?.alert||0}`});
+      if(v)g+=`<text x="${(lw+j*cw+cw/2).toFixed(1)}" y="${(y+ch/2+4).toFixed(1)}" font-size="11" text-anchor="middle" font-weight="700" fill="${idx>=4?'#fff':INK}" pointer-events="none">${v}</text>`});
+    g+=T(lw+dims.length*cw+tw-4,y+ch/2+4,critMode?o.crit:o.tot,{anchor:'end',size:12,fill:INK,weight:700});
+  });
+  const leg=`<div class="dash-legend"><span>${critMode?'Hallazgos críticos (alertas + brechas)':'Todos los hallazgos'}</span><span>0</span><i class="ramp" style="background:linear-gradient(90deg,${ramp.slice(1).join(',')})"></i><span>${max}</span><span>Celda gris: sin registros</span></div>`;
+  return leg+svgWrap(Wd,H,g,'Mapa de calor sede por dimensión')+dataTable(['Sede',...dims.map((d,j)=>'D'+(j+1)),'Total'],list.map(o=>[o.c,...dims.map(d=>val(o.cells[d])),critMode?o.crit:o.tot]));
+}
+
+/* ---------- 4. Matriz de priorización por sede (burbujas) ---------- */
+function chartBubble(W,D){
+  const M=new Map();D.rows.forEach(r=>{if(!r.campus)return;if(!M.has(r.campus))M.set(r.campus,{c:r.campus,n:0,crit:0,people:0,classes:0,recs:new Set()});const o=M.get(r.campus);o.n++;if(isCrit(r))o.crit++;if(!o.recs.has(r.recordId)){o.recs.add(r.recordId);o.people+=peopleOf(r);if(r.recordType==='Observar clase')o.classes++}});
+  const list=[...M.values()].map(o=>({...o,p:pct(o.crit,o.n),voices:o.people+o.classes}));
+  if(!list.length)return emptyChart();
+  const H=330,ml=46,mr=24,mt=18,mb=44,pw=W-ml-mr,ph=H-mt-mb,sx=niceScale(Math.max(...list.map(o=>o.n)),4),X=v=>ml+v/sx.max*pw,Y=v=>mt+ph-v/100*ph;
+  const mx=median(list.map(o=>o.n)),my=median(list.map(o=>o.p)),maxV=Math.max(1,...list.map(o=>o.voices)),rad=o=>6+16*Math.sqrt(o.voices/maxV);
+  let g=`<rect x="${X(mx)}" y="${mt}" width="${(ml+pw-X(mx)).toFixed(1)}" height="${(Y(my)-mt).toFixed(1)}" fill="#fdf1f2"/>`;
+  [0,25,50,75,100].forEach(v=>{g+=`<line x1="${ml}" x2="${ml+pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="${GRID}"/>`+T(ml-6,Y(v)+4,v+'%',{anchor:'end',size:11})});
+  for(let v=0;v<=sx.max;v+=sx.step)g+=T(X(v),H-mb+16,v,{anchor:'middle',size:11});
+  g+=`<line x1="${X(mx)}" x2="${X(mx)}" y1="${mt}" y2="${mt+ph}" stroke="#94a3b8" stroke-dasharray="4 4"/><line x1="${ml}" x2="${ml+pw}" y1="${Y(my)}" y2="${Y(my)}" stroke="#94a3b8" stroke-dasharray="4 4"/>`;
+  g+=T(ml+pw-6,mt+14,'Atender primero',{anchor:'end',size:11,fill:'#b42335',weight:700});
+  g+=T(ml+pw/2,H-6,'Hallazgos registrados (volumen)',{anchor:'middle',size:11,fill:INK});
+  g+=`<text transform="translate(12 ${mt+ph/2}) rotate(-90)" font-size="11" fill="${INK}" text-anchor="middle">% de hallazgos críticos</text>`;
+  [...list].sort((a,b)=>rad(b)-rad(a)).forEach(o=>{const hot=o.n>=Math.max(mx,5)&&o.p>=my&&list.length>1,cxp=X(o.n),cyp=Y(o.p),r=rad(o);
+    g+=`<circle cx="${cxp.toFixed(1)}" cy="${cyp.toFixed(1)}" r="${r.toFixed(1)}" fill="${hot?'#b42335':INK}" fill-opacity=".8" stroke="#fff" stroke-width="2" ${tipAttr(`${o.c}\nHallazgos: ${o.n}\nCríticos: ${o.crit} (${fmtP(o.p)})\nPersonas escuchadas: ${o.people}\nClases observadas: ${o.classes}`)}/>`;
+    const right=cxp+r+70<W;g+=`<text x="${(right?cxp+r+4:cxp-r-4).toFixed(1)}" y="${(cyp+4).toFixed(1)}" font-size="11" fill="${INK}" text-anchor="${right?'start':'end'}" pointer-events="none">${esc(trunc(o.c,18))}</text>`});
+  const leg=`<div class="dash-legend"><span><i style="background:#b42335;border-radius:50%"></i>Sede en el cuadrante de prioridad</span><span><i style="background:${INK};border-radius:50%"></i>Otras sedes</span><span>Tamaño: personas escuchadas + clases observadas</span></div>`;
+  return leg+svgWrap(W,H,g,'Matriz de priorización por sede')+`<div class="dash-note">Las líneas punteadas son las medianas de la red. Arriba a la derecha quedan las sedes con más hallazgos y mayor proporción de críticos. Una burbuja pequeña indica poca voz recogida: el porcentaje es menos confiable. Una sede se marca en rojo solo si tiene al menos 5 hallazgos.</div>`+dataTable(['Sede','Hallazgos','Críticos','% críticos','Personas','Clases'],list.sort((a,b)=>b.p-a.p).map(o=>[o.c,o.n,o.crit,fmtP(o.p),o.people,o.classes]));
+}
+
+/* ---------- 5. Pareto de "¿Qué observaste?" en críticos ---------- */
+function chartPareto(W,D){
+  const cnt=new Map();D.crit.forEach(r=>String(r.queObservo||r.criteria||'').split(/\s*\|\s*/).map(x=>x.trim()).filter(Boolean).forEach(t=>{t=/^Otro/i.test(t)?'Otro (especificado)':t;cnt.set(t,(cnt.get(t)||0)+1)}));
+  const all=[...cnt.entries()].sort((a,b)=>b[1]-a[1]);
+  if(!all.length)return emptyChart('No hay hallazgos críticos con los filtros actuales.');
+  const total=all.reduce((n,x)=>n+x[1],0),top=all.slice(0,10);let cum=0,vital=0;
+  const rows=top.map(([t,n])=>{cum+=n;const c=pct(cum,total);const isV=(c-pct(n,total))<80;if(isV)vital++;return {t,n,c,isV}});
+  const lw=Math.min(230,Math.max(130,W*.4)),rw=96,pw=W-lw-rw,rh=26,H=rows.length*rh+6,max=top[0][1],chars=Math.floor(lw/6.6);
+  let g='';rows.forEach((o,i)=>{const y=i*rh+3,w=o.n/max*pw;g+=`<g>${T(0,y+rh/2+1,trunc(o.t,chars),{size:12,fill:INK})}<title>${esc(o.t)}</title></g>`+R(lw,y+3,Math.max(2,w),rh-10,o.isV?'#b42335':SOFT,{rx:3,tip:`${o.t}\n${o.n} menciones en hallazgos críticos\nAcumulado: ${fmtP(o.c)}`})+T(lw+w+6,y+rh/2+1,`${o.n} · acum. ${fmtP(o.c)}`,{size:11,fill:INK})});
+  const leg=`<div class="dash-legend"><span><i style="background:#b42335"></i>Pocos vitales (hasta 80% acumulado)</span><span><i style="background:${SOFT}"></i>Resto</span></div>`;
+  return leg+svgWrap(W,H,g,'Pareto de temas en hallazgos críticos')+`<div class="dash-note"><b>${vital} tema${vital===1?'':'s'}</b> concentra${vital===1?'':'n'} cerca del 80% de las menciones en hallazgos críticos (${nfmt(total)} menciones en total${all.length>10?`, ${all.length} temas distintos; se muestran los 10 principales`:''}).</div>`+dataTable(['Tema observado','Menciones','% acumulado'],all.map(([t,n],i)=>[t,n,fmtP(pct(all.slice(0,i+1).reduce((s,x)=>s+x[1],0),total))]));
+}
+
+/* ---------- 6. Gestión: embudo + recurrencia ---------- */
+function chartFunnel(W,D){
+  const c=D.crit;if(!c.length)return emptyChart('No hay hallazgos críticos con los filtros actuales.');
+  const steps=[['Hallazgos críticos',c.length],['Con acción definida',c.filter(r=>ACTION.has(r.followup)||hasDerivation(r)).length],['Derivados a un área',c.filter(hasDerivation).length],['Correo de derivación enviado',c.filter(r=>r.derivationStatus==='Correo enviado').length]];
+  const lw=Math.min(190,Math.max(120,W*.34)),rw=110,pw=W-lw-rw,rh=34;let g='';
+  steps.forEach(([l,n],i)=>{const y=i*rh+2,w=n/c.length*pw;g+=T(0,y+rh/2+2,l,{size:12,fill:INK})+R(lw,y+5,Math.max(2,w),rh-12,i?'#5b5558':INK,{rx:3,tip:`${l}: ${n} (${fmtP(pct(n,c.length))} de críticos)`})+T(lw+w+6,y+rh/2+2,`${n} · ${fmtP(pct(n,c.length))}`,{size:11,fill:INK,weight:i?400:700})});
+  let html=svgWrap(W,steps.length*rh+4,g,'Embudo de gestión de hallazgos críticos');
+  const rc=c.filter(r=>RECUR.includes(r.recurrence)),cnt=Object.fromEntries(RECUR.map(k=>[k,rc.filter(r=>r.recurrence===k).length]));
+  html+=`<h4 style="margin:16px 0 6px;font-size:13px;color:${INK}">Recurrencia de los hallazgos críticos</h4>`;
+  if(!rc.length)html+=emptyChart('Aún no se marcó recurrencia en el cierre de los registros críticos.');
+  else{let x=0,bar='';const bw=W,bh=22;RECUR.forEach(k=>{const w=cnt[k]/rc.length*bw;if(w>0){bar+=R(x+1,0,Math.max(1,w-2),bh,RECUR_COLOR[k],{rx:3,tip:`${k}: ${cnt[k]} (${fmtP(pct(cnt[k],rc.length))})`});if(w>44)bar+=`<text x="${(x+w/2).toFixed(1)}" y="15" font-size="11" text-anchor="middle" font-weight="700" fill="${k==='Nuevo'?INK:'#fff'}" pointer-events="none">${fmtP(pct(cnt[k],rc.length))}</text>`;x+=w}});
+    html+=legendHtml(RECUR.map(k=>[`${k} (${cnt[k]})`,RECUR_COLOR[k]]))+svgWrap(W,bh,bar,'Recurrencia')+`<div class="dash-note"><b>${fmtP(pct(cnt['Reiterado en esta sede']+cnt['Visto en otras sedes'],rc.length))}</b> de los críticos con recurrencia marcada se repite: son problemas de proceso, no casos aislados.</div>`}
+  return html+dataTable(['Etapa','Cantidad','% de críticos'],steps.map(([l,n])=>[l,n,fmtP(pct(n,c.length))]));
+}
+
+/* ---------- 7. Cobertura académica por facultad ---------- */
+function chartFaculty(W,D){
+  const M=new Map();D.rows.forEach(r=>{if(!r.faculty)return;if(!M.has(r.faculty))M.set(r.faculty,{f:r.faculty,recs:new Set(),prog:new Set(),cur:new Set(),crit:0,n:0});const o=M.get(r.faculty);o.recs.add(r.recordId);if(r.program)o.prog.add(r.program);if(r.course)o.cur.add(r.course);o.n++;if(isCrit(r))o.crit++});
+  const list=[...M.values()].sort((a,b)=>b.recs.size-a.recs.size);
+  if(!list.length)return emptyChart('Aún no hay registros de Observar clase o Voz del estudiante con facultad.');
+  const lw=Math.min(240,Math.max(130,W*.42)),rw=40,pw=W-lw-rw,rh=38,H=list.length*rh+4,max=list[0].recs.size,chars=Math.floor(lw/6.4);
+  let g='';list.forEach((o,i)=>{const y=i*rh+2,w=o.recs.size/max*pw;g+=T(0,y+14,trunc(o.f,chars),{size:12,fill:INK,weight:700})+T(0,y+29,`${o.prog.size} carrera${o.prog.size===1?'':'s'} · ${o.cur.size} curso${o.cur.size===1?'':'s'} · ${fmtP(pct(o.crit,o.n))} críticos`,{size:11})+R(lw,y+8,Math.max(2,w),16,INK,{rx:3,tip:`${o.f}\nRegistros: ${o.recs.size}\nCarreras cubiertas: ${o.prog.size}\nCursos cubiertos: ${o.cur.size}\nHallazgos críticos: ${o.crit} de ${o.n}`})+T(lw+w+6,y+20,o.recs.size,{size:12,fill:INK,weight:700})});
+  return svgWrap(W,H,g,'Cobertura académica por facultad')+dataTable(['Facultad','Registros','Carreras','Cursos','% críticos'],list.map(o=>[o.f,o.recs.size,o.prog.size,o.cur.size,fmtP(pct(o.crit,o.n))]));
+}
+
+/* ---------- 8. Composición: tipo de registro y turno ---------- */
+function chartComposition(W,D){
+  if(!D.recs.length)return emptyChart();
+  const groups=[['Tipo de registro',FILTER_CATALOGS.recordTypes,r=>r.recordType],['Turno',FILTER_CATALOGS.turns,r=>r.turn]];
+  let html='';groups.forEach(([title,cat,fn])=>{const cnt=cat.map(k=>[k,D.recs.filter(r=>fn(r)===k).length]),tot=cnt.reduce((n,x)=>n+x[1],0),max=Math.max(1,...cnt.map(x=>x[1]));
+    const lw=Math.min(150,W*.36),pw=W-lw-70,rh=24;let g='';cnt.forEach(([k,n],i)=>{const y=i*rh+2,w=n/max*pw;g+=T(0,y+rh/2+3,k,{size:12,fill:INK})+R(lw,y+5,Math.max(n?2:0,w),rh-10,INK,{rx:3,tip:`${title}: ${k}\n${n} registros (${fmtP(pct(n,tot))})`})+T(lw+w+6,y+rh/2+3,`${n} · ${fmtP(pct(n,tot))}`,{size:11,fill:INK})});
+    html+=`<h4 style="margin:${html?14:0}px 0 6px;font-size:13px;color:${INK}">${title}${title==='Turno'?` <span style="font-weight:400;color:${MUTED};font-size:12px">(solo registros con turno: ${tot})</span>`:''}</h4>`+svgWrap(W,cnt.length*rh+4,g,title)});
+  return html;
+}
+
+/* ---------- 9. Actividad por área visitante ---------- */
+function chartAreas(W,D){
+  const M=new Map();D.recs.forEach(r=>{const a=r.visitorArea||'Sin área';if(!M.has(a))M.set(a,{a,n:0,secs:[],people:new Set()});const o=M.get(a);o.n++;if(Number(r.recordDurationSeconds)>0)o.secs.push(Number(r.recordDurationSeconds));if(r.visitorEmail)o.people.add(r.visitorEmail)});
+  const list=[...M.values()].sort((a,b)=>b.n-a.n);if(!list.length)return emptyChart();
+  const lw=Math.min(220,Math.max(120,W*.4)),rw=150,pw=W-lw-rw,rh=30,max=list[0].n,chars=Math.floor(lw/6.6);let g='';
+  list.forEach((o,i)=>{const y=i*rh+2,w=o.n/max*pw,med=median(o.secs);g+=T(0,y+rh/2+3,trunc(o.a,chars),{size:12,fill:INK})+R(lw,y+6,Math.max(2,w),rh-12,INK,{rx:3,tip:`${o.a}\nRegistros: ${o.n}\nVisitantes: ${o.people.size}\nTiempo mediano: ${fmtSecs(med)}`})+T(lw+w+6,y+rh/2+3,`${o.n} · ${o.people.size} visit. · ${fmtSecs(med)}`,{size:11,fill:INK})});
+  return svgWrap(W,list.length*rh+4,g,'Actividad por área visitante')+dataTable(['Área','Registros','Visitantes','Tiempo mediano'],list.map(o=>[o.a,o.n,o.people.size,fmtSecs(median(o.secs))]));
+}
+
+/* ---------- 10. Calidad del registro (medidores con meta) ---------- */
+function chartQuality(W,D){
+  const {rows,recs,crit}=D,voice=recs.filter(r=>/Voz/.test(r.recordType||'')),acad=recs.filter(r=>r.recordType==='Observar clase'||r.recordType==='Voz del estudiante'),der=crit.filter(hasDerivation);
+  const items=[
+    ['Registros con evidencia (foto, documento o audio)',recs.filter(r=>Number(r.evidenceCount||0)>0).length,recs.length],
+    ['Hallazgos con detalle suficiente (80 caracteres o más)',rows.filter(r=>String(r.detailFinding||'').trim().length>=80).length,rows.length],
+    ['Registros de voz con transcripción',voice.filter(r=>String(r.transcript||'').trim().length>0).length,voice.length],
+    ['Contexto académico completo (facultad, carrera y curso)',acad.filter(r=>r.faculty&&r.program&&r.course).length,acad.length],
+    ['Hallazgos críticos con acción definida',crit.filter(r=>ACTION.has(r.followup)||hasDerivation(r)).length,crit.length],
+    ['Derivaciones con correo enviado',der.filter(r=>r.derivationStatus==='Correo enviado').length,der.length]
+  ];
+  return `<div class="dash-meters">${items.map(([l,a,b])=>{const p=pct(a,b),ok=p>=TARGET;return `<div ${tipAttr(`${l}\n${a} de ${b}`)}><div class="dash-meter-top"><span>${esc(l)}</span><b>${b?fmtP(p):'—'}</b></div><div class="dash-track"><i style="width:${b?Math.min(100,p):0}%;background:${b&&!ok?'#8e1a29':INK}"></i><u style="left:${TARGET}%"></u></div><div class="dash-meter-sub"><span>${b?`${nfmt(a)} de ${nfmt(b)}`:'Sin casos con los filtros actuales'}</span>${b?`<span style="color:${ok?'#0f6a4d':'#8a5a00'};font-weight:700">${ok?'Cumple meta':'Debajo de la meta'}</span>`:''}</div></div>`}).join('')}</div><div class="dash-note">La línea gris marca la meta sugerida de ${TARGET}%. Sin datos completos los demás gráficos pierden precisión: revisa primero este bloque.</div>`;
+}
+
+/* ---------- 11. Hallazgos críticos que requieren gestión ---------- */
+function pendingHtml(D){
+  const list=D.crit.map(r=>({r,st:mgmtState(r)})).filter(x=>x.st!=='Derivado'&&!(x.st==='En seguimiento'&&natOf(x.r)!=='Alerta')).sort((a,b)=>(natOf(a.r)==='Alerta'?0:1)-(natOf(b.r)==='Alerta'?0:1)||String(b.r.recordDate+b.r.recordEndTime).localeCompare(String(a.r.recordDate+a.r.recordEndTime)));
+  if(!list.length)return emptyChart(D.crit.length?'Todos los hallazgos críticos tienen acción o derivación registrada.':'No hay hallazgos críticos con los filtros actuales.');
+  const show=list.slice(0,25);
+  return `<div class="dash-note" style="margin:0 0 10px"><b>${list.length}</b> hallazgo${list.length===1?'':'s'} crítico${list.length===1?'':'s'} sin cierre de gestión. Se priorizan las alertas y lo más reciente${list.length>25?'; se muestran los 25 primeros (usa los filtros para acotar)':''}.</div><div class="table-wrap"><table class="dash-pend"><thead><tr><th>Fecha</th><th>Sede</th><th>Tipo</th><th>Dimensión</th><th>Naturaleza</th><th>Detalle</th><th>Estado de gestión</th><th></th></tr></thead><tbody>${show.map(({r,st})=>`<tr><td><strong>${esc(dateOnly(r.recordDate)||'—')}</strong><span class="sub">${esc(r.recordId||'')} · ítem ${Number(r.itemNumber||1)}</span></td><td>${esc(r.campus||'—')}</td><td>${esc(r.recordType||'—')}</td><td>${esc(dimShort(r.dimension)||'—')}</td><td>${natBadge(natOf(r))}</td><td style="max-width:300px">${esc(trunc(r.detailFinding||r.transcript||'—',140))}</td><td><span class="badge ${st==='Sin acción definida'?'red':'amber'}">${esc(st)}</span></td><td><button class="mini" data-detail="${esc(rowKey(r))}">Ver detalle</button></td></tr>`).join('')}</tbody></table></div>`;
+}
+
+/* ---------- ensamblado ---------- */
+const DASH_CHARTS={dTrend:chartTrend,dBalance:chartBalance,dHeat:chartHeat,dBubble:chartBubble,dPareto:chartPareto,dFunnel:chartFunnel,dFaculty:chartFaculty,dComp:chartComposition,dAreas:chartAreas,dQuality:chartQuality};
+function fillDashCharts(only){const D=DASH.data;if(!D)return;Object.entries(DASH_CHARTS).forEach(([id,fn])=>{if(only&&id!==only)return;const el=document.getElementById(id);if(!el)return;const W=Math.max(300,Math.floor(el.clientWidth||600));try{el.innerHTML=fn(W,D)}catch(e){console.error(e);el.innerHTML=emptyChart('No se pudo dibujar este gráfico.')}})}
+function renderDashboard(){
+  const box=$('#dashboard');if(!box)return;
+  const D=dashData();DASH.data=D;
+  const {rows,recs}=D;
+  $('#resultCount').textContent=`${rows.length} ítem(s) · ${recs.length} registro(s)`;
+  const heatTools=`<div class="dash-seg" role="group" aria-label="Métrica del mapa de calor"><button type="button" data-heat="crit" class="${DASH.heat==='crit'?'active':''}">Críticos</button><button type="button" data-heat="all" class="${DASH.heat==='all'?'active':''}">Todos</button></div>`;
+  box.innerHTML=kpisHtml(D)+
+  `<details class="dash-guide"><summary>Cómo leer y usar este tablero</summary><ul>
+    <li><b>Primero revisa “Calidad del registro”.</b> Si hay pocos registros, sin evidencia o sin contexto académico, los porcentajes de los demás gráficos son menos confiables.</li>
+    <li><b>Busca dónde actuar:</b> el mapa de calor y la matriz de priorización muestran qué sedes y dimensiones concentran alertas y brechas.</li>
+    <li><b>Busca qué atacar:</b> el Pareto muestra los pocos temas que explican la mayor parte de los hallazgos críticos.</li>
+    <li><b>Cierra el ciclo:</b> el embudo y la lista final muestran los críticos sin acción o sin derivación enviada; son la agenda de seguimiento.</li>
+    <li><b>Usa los filtros de arriba</b> (sede, fecha, tipo, facultad, dimensión) para preparar reportes por sede, escuela o periodo. Pasa el cursor sobre cualquier barra o celda para ver el detalle, y abre “Ver datos” para la tabla.</li>
+    <li>Los porcentajes se calculan sobre <b>hallazgos (ítems)</b>; las personas y clases, sobre <b>registros</b>. Con menos de 10 hallazgos, interpreta los porcentajes con cautela.</li>
+  </ul></details>`+
+  `<div class="dash-grid">
+    ${card('dTrend','Evolución de hallazgos','¿Mejora o empeora la situación? Compara en el tiempo los hallazgos positivos contra los críticos.',{wide:true})}
+    ${card('dBalance','Balance por dimensión','¿En qué temas se concentran los problemas y en cuáles las fortalezas? Ordenado de mayor a menor proporción de críticos.')}
+    ${card('dBubble','Matriz de priorización por sede','¿Qué sedes atender primero? Cruza volumen de hallazgos con su proporción de críticos.')}
+    ${card('dHeat','Mapa de calor: sede × dimensión','¿Dónde exactamente? Ubica cada problema en la combinación sede y dimensión. Pasa el cursor sobre D1–D13 para ver el nombre.',{wide:true,tools:heatTools})}
+    ${card('dPareto','Temas que explican los hallazgos críticos','¿Qué atacar? Pocos temas suelen explicar la mayoría de los problemas (principio 80/20).')}
+    ${card('dFunnel','Gestión y recurrencia de críticos','¿Se cierra el ciclo? Cuántos críticos tienen acción, derivación y correo enviado, y cuántos se repiten.')}
+    ${card('dFaculty','Cobertura académica por facultad','¿A qué escuelas y carreras llega el acompañamiento? Muestra también las que faltan visitar.')}
+    ${card('dComp','Composición de los registros','¿Qué tipo de escucha predomina y en qué turnos? Detecta sesgos, por ejemplo, que el turno noche no se visite.')}
+    ${card('dAreas','Actividad por área visitante','¿Quién está registrando y con qué dedicación? Registros, visitantes y tiempo mediano por registro.')}
+    ${card('dQuality','Calidad del registro','¿Podemos confiar en los datos? Mide completitud y trazabilidad frente a una meta del 80%.')}
+    <article class="dash-card wide"><header><h3>Hallazgos críticos que requieren gestión</h3></header><p class="dash-why">Agenda de seguimiento: alertas y brechas sin acción definida o con derivación pendiente.</p>${pendingHtml(D)}</article>
+  </div>`;
+  requestAnimationFrame(()=>fillDashCharts());
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-heat]');if(!b)return;DASH.heat=b.dataset.heat;$$('[data-heat]').forEach(x=>x.classList.toggle('active',x===b));fillDashCharts('dHeat')});
+(function(){const tip=$('#dashTip');let last=null;
+  function show(t,x,y){tip.textContent=t;tip.classList.add('show');const r=tip.getBoundingClientRect();let L=x+14,Tp=y+14;if(L+r.width>innerWidth-8)L=x-r.width-14;if(Tp+r.height>innerHeight-8)Tp=y-r.height-14;tip.style.left=Math.max(8,L)+'px';tip.style.top=Math.max(8,Tp)+'px'}
+  document.addEventListener('mousemove',e=>{const el=e.target.closest?.('#dashboard [data-tip]');if(!el){if(last){tip.classList.remove('show');last=null}return}last=el;show(el.getAttribute('data-tip'),e.clientX,e.clientY)});
+  document.addEventListener('click',e=>{const el=e.target.closest?.('#dashboard svg [data-tip]');if(el&&matchMedia('(hover: none)').matches)show(el.getAttribute('data-tip'),e.clientX,e.clientY);else if(!el&&matchMedia('(hover: none)').matches)tip.classList.remove('show')});
+  let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(state.view==='dashboard')fillDashCharts()},180)});
+})();
+
+/* =====================================================================
+   IMPORTAR EXCEL AL CONSOLIDADO · Ruta SISE v70
+   Lector .xlsx propio (ZIP + XML, sin librerías) y .csv. Las filas se
+   normalizan a los catálogos de Ruta SISE y se guardan vía Apps Script.
+   ===================================================================== */
+const IMP={file:null,sheets:[],sheet:0,headers:[],rows:[],map:{},result:null,busy:false,payload:false,skipTests:true};
+const nrm=s=>String(s??'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+const IMP_FIELDS=[
+  // [clave, etiqueta, obligatorio, sinónimos]
+  ['recordDate','Fecha',true,['fecha','fecharegistro','fechadelregistro','fechadevisita','date','dia']],
+  ['campus','Sede',true,['sede','campus','local','sedesise']],
+  ['dimension','Dimensión',true,['dimension','dimensiones','eje']],
+  ['nature','Naturaleza',true,['naturaleza','clasificacion','tipodehallazgo','tipohallazgo','valoracion']],
+  ['detailFinding','Detalle del hallazgo',true,['detalle','detallehallazgo','detalledelhallazgo','hallazgo','descripcion','observacion','observaciones','comentario']],
+  ['recordType','Tipo de registro',false,['tiporegistro','tipoderegistro','tipo','actividad','queestashaciendo']],
+  ['queObservo','¿Qué observaste?',false,['queobservo','queobservaste','queobservo','criterio','criterios','tema','subtema','aspecto']],
+  ['recordId','ID de registro',false,['idregistro','idderegistro','id','codigoregistro','codigo']],
+  ['itemNumber','Ítem',false,['item','nitem','nroitem','numeroitem']],
+  ['visitId','ID de visita',false,['idvisita','iddevisita','visita']],
+  ['modality','Modalidad',false,['modalidad']],
+  ['visitorName','Visitante',false,['visitante','visitantenombre','responsable','registradopor','nombrevisitante']],
+  ['visitorEmail','Correo del visitante',false,['visitantecorreo','correovisitante','correo','email']],
+  ['visitorArea','Área visitante',false,['areavisitante','area']],
+  ['visitorRole','Rol visitante',false,['rolvisitante','rol','cargo']],
+  ['faculty','Facultad',false,['facultad','escuela']],
+  ['program','Carrera',false,['programacarrera','carrera','programa','programadeestudios']],
+  ['course','Curso',false,['cursoasignatura','curso','asignatura','unidaddidactica']],
+  ['cycle','Ciclo',false,['ciclo','semestre']],
+  ['turn','Turno',false,['turno','horario']],
+  ['personType','Tipo de persona',false,['tipopersona','tipodepersona']],
+  ['voiceMode','Modo de voz',false,['modovoz','mododevoz','individualgrupal']],
+  ['personName','Persona escuchada',false,['personanombre','persona','nombrepersona','nombreentrevistado','entrevistado']],
+  ['groupInterviewCount','Cantidad de entrevistados',false,['cantidadentrevistados','entrevistados','nentrevistados']],
+  ['studentCount','Cantidad de estudiantes',false,['cantidadestudiantes','estudiantespresentes','nestudiantes','asistentes']],
+  ['followup','Acción posterior',false,['accionposterior','accion','seguimiento']],
+  ['recurrence','Recurrencia',false,['recurrencia']],
+  ['derivationArea','Área de derivación',false,['areaderivacion','areadederivacion','derivadoa','derivacion']],
+  ['derivationStatus','Estado de derivación',false,['estadoderivacion','estadodederivacion']]
+];
+const IMP_LABEL=Object.fromEntries(IMP_FIELDS.map(f=>[f[0],f[1]]));
+
+/* ---------- lector .xlsx ---------- */
+async function readZip(buf){
+  const u8=new Uint8Array(buf),dv=new DataView(buf);let eocd=-1;
+  for(let i=u8.length-22;i>=Math.max(0,u8.length-65557);i--){if(dv.getUint32(i,true)===0x06054b50){eocd=i;break}}
+  if(eocd<0)throw new Error('El archivo no es un Excel .xlsx válido. Si es .xls antiguo, guárdalo como .xlsx o .csv.');
+  const n=dv.getUint16(eocd+10,true);let p=dv.getUint32(eocd+16,true);const files={},td=new TextDecoder();
+  for(let i=0;i<n;i++){if(dv.getUint32(p,true)!==0x02014b50)break;const method=dv.getUint16(p+10,true),csize=dv.getUint32(p+20,true),nl=dv.getUint16(p+28,true),xl=dv.getUint16(p+30,true),cl=dv.getUint16(p+32,true),lho=dv.getUint32(p+42,true);files[td.decode(u8.subarray(p+46,p+46+nl))]={method,csize,lho};p+=46+nl+xl+cl}
+  return async name=>{const f=files[name]||files[Object.keys(files).find(k=>k.toLowerCase()===name.toLowerCase())];if(!f)return null;const s=f.lho+30+dv.getUint16(f.lho+26,true)+dv.getUint16(f.lho+28,true),data=u8.subarray(s,s+f.csize);
+    if(f.method===0)return td.decode(data);if(f.method!==8)throw new Error('Formato de compresión no soportado.');
+    if(typeof DecompressionStream==='undefined')throw new Error('Este navegador no puede leer .xlsx. Usa Chrome o Edge actualizados, o guarda el archivo como .csv.');
+    return td.decode(await new Response(new Blob([data]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer())};
+}
+const xmlDoc=s=>new DOMParser().parseFromString(s,'application/xml');
+const tags=(el,t)=>[...el.getElementsByTagNameNS('*',t)];
+function colIndex(ref){const m=/^([A-Z]+)/.exec(ref||'');if(!m)return -1;let n=0;for(const ch of m[1])n=n*26+ch.charCodeAt(0)-64;return n-1}
+async function parseXlsx(buf){
+  const read=await readZip(buf),wb=await read('xl/workbook.xml');if(!wb)throw new Error('No se encontró el libro dentro del archivo.');
+  const relsXml=await read('xl/_rels/workbook.xml.rels'),rels={};if(relsXml)tags(xmlDoc(relsXml),'Relationship').forEach(r=>rels[r.getAttribute('Id')]=r.getAttribute('Target'));
+  const ssXml=await read('xl/sharedStrings.xml'),shared=ssXml?tags(xmlDoc(ssXml),'si').map(si=>tags(si,'t').map(t=>t.textContent).join('')):[];
+  const sheets=[];
+  for(const sh of tags(xmlDoc(wb),'sheet')){
+    const rid=sh.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','id')||sh.getAttribute('r:id');let target=rels[rid]||'';
+    target=target.startsWith('/')?target.slice(1):('xl/'+target.replace(/^\.\//,''));const x=await read(target);if(!x)continue;
+    const grid=[];tags(xmlDoc(x),'row').forEach(row=>{const out=[];tags(row,'c').forEach((c,k)=>{let i=colIndex(c.getAttribute('r'));if(i<0)i=out.length;const t=c.getAttribute('t'),v=tags(c,'v')[0]?.textContent??'';let val;
+      if(t==='s')val=shared[+v]??'';else if(t==='inlineStr')val=tags(c,'t').map(n=>n.textContent).join('');else if(t==='b')val=v==='1'?'VERDADERO':'FALSO';else if(t==='str'||t==='e')val=v;else val=v===''?'':Number(v);
+      out[i]=val});grid.push(Array.from(out,x=>x??''))});
+    sheets.push({name:sh.getAttribute('name')||'Hoja',grid});
+  }
+  if(!sheets.length)throw new Error('El archivo no tiene hojas con datos.');
+  return sheets;
+}
+function parseCsv(text){
+  text=text.replace(/^﻿/,'');const first=text.split(/\r?\n/)[0]||'',delim=(first.match(/;/g)||[]).length>(first.match(/,/g)||[]).length?';':(first.includes('\t')?'\t':',');
+  const rows=[];let row=[],cur='',q=false;
+  for(let i=0;i<text.length;i++){const ch=text[i];if(q){if(ch==='"'){if(text[i+1]==='"'){cur+='"';i++}else q=false}else cur+=ch}else if(ch==='"')q=true;else if(ch===delim){row.push(cur);cur=''}else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&text[i+1]==='\n')i++;row.push(cur);rows.push(row);row=[];cur=''}else cur+=ch}
+  if(cur!==''||row.length){row.push(cur);rows.push(row)}
+  return [{name:'CSV',grid:rows}];
+}
+function useSheet(i){
+  IMP.sheet=i;const g=(IMP.sheets[i]?.grid||[]).filter(r=>r.some(c=>String(c).trim()!==''));
+  const h=g.findIndex(r=>r.filter(c=>String(c).trim()).length>=2);
+  IMP.headers=h<0?[]:g[h].map((c,j)=>String(c).trim()||`Columna ${j+1}`);IMP.rows=h<0?[]:g.slice(h+1);
+  IMP.payload=IMP.rows.length>0&&IMP.rows.filter(r=>findPayload(r)).length>=IMP.rows.length*0.5;
+  IMP.map={};const used=new Set();
+  IMP_FIELDS.forEach(([k,,,syn])=>{const keyN=nrm(k);let j=IMP.headers.findIndex((hd,ix)=>!used.has(ix)&&(nrm(hd)===keyN||syn.includes(nrm(hd))));if(j<0)j=IMP.headers.findIndex((hd,ix)=>!used.has(ix)&&syn.some(sy=>sy.length>4&&nrm(hd).includes(sy)));if(j>=0){IMP.map[k]=j;used.add(j)}});
+}
+
+
+/* ---------- Consolidado anterior de Ruta SISE (columna PAYLOAD_JSON) ---------- */
+function findPayload(row){for(const c of row){if(typeof c!=='string')continue;const t=c.trim();if(t[0]!=='{'||t.length<20)continue;try{const o=JSON.parse(t);if(o&&typeof o==='object'&&(o.recordId||o.historyId)&&(o.systemEvent||o.recordType||o.visitId))return o}catch(e){}}return null}
+const INSTITUTIONAL=/@(sise\.edu\.pe|cientifica\.edu\.pe)$/i;
+function looksLikeTest(o,detail){const d=String(detail||'').trim();return d.replace(/[^\p{L}]/gu,'').length<8||/^(prueba|test|xxx+|asdf|fff+)\b/i.test(d)}
+function legacyRecord(o){
+  const r=JSON.parse(JSON.stringify(o));['personCode','attachmentRefs','time','actionKey'].forEach(k=>delete r[k]);
+  let items=Array.isArray(o.items)&&o.items.length?o.items:null;if(!items&&o.itemsJson){try{const x=JSON.parse(o.itemsJson);if(Array.isArray(x)&&x.length)items=x}catch(e){}}
+  if(!items){const parts=(Array.isArray(o.criteria)?o.criteria:String(o.queObservo||o.criteria||'').split(/\s*\|\s*/)).map(x=>String(x).trim()).filter(Boolean).map(x=>/^otro$/i.test(x)&&o.criteriaOther?`Otro: ${o.criteriaOther}`:x);
+    items=[{itemNumber:1,dimension:o.dimension,queObservo:parts.join(' | '),detail:o.detailFinding||o.note||o.transcript||'',nature:o.nature,transcript:o.transcript||''}]}
+  r.items=items.map((it,i)=>({itemNumber:i+1,dimension:normDimension(it.dimension)||'',queObservo:it.queObservo||it.criteria||'',detail:it.detail||it.detailFinding||it.note||'',nature:normNature(it.nature)||'',transcript:it.transcript||'',evidenceCount:it.evidenceCount||0}));
+  r.itemCount=r.items.length;
+  r.recordDate=normDate(o.recordDate||o.visitDate||String(o.updatedTime||'').slice(0,10));
+  r.recordStartTime=o.recordStartTime||o.recordTime||'';r.recordEndTime=o.recordEndTime||(/T\d/.test(o.updatedTime||'')?'':o.updatedTime)||o.recordTime||'';
+  r.campus=normFromCatalog(o.campus,FILTER_CATALOGS.campuses)||o.campus||'';r.recordType=normType(o.recordType)||o.recordType||'Otros hallazgos';
+  r.personType=o.personType||o.condition||'';r.evidenceCount=Number(o.evidenceCount||0);
+  if(r.evidenceCount)r.evidenceSyncStatus='Evidencias en el sistema anterior (no migradas)';
+  return r;
+}
+function evaluatePayload(){
+  const records=[],visits=[],errors=[],warns=[],tests=[];
+  IMP.rows.forEach((row,i)=>{const line=i+2,o=findPayload(row);if(!o){if(row.some(c=>String(c).trim()))errors.push({line,msg:'fila sin datos completos (PAYLOAD_JSON)'});return}
+    const ev=String(o.systemEvent||'').toUpperCase();
+    if(ev==='INICIO_VISITA'||ev==='CIERRE_VISITA'){const v=JSON.parse(JSON.stringify(o));delete v.personCode;v.systemEvent=ev;v.recordId=o.historyId||o.recordId;v.visitDate=normDate(o.visitDate)||o.visitDate||'';if(v.visitEndDate)v.visitEndDate=normDate(v.visitEndDate)||v.visitEndDate;v.campus=normFromCatalog(o.campus,FILTER_CATALOGS.campuses)||o.campus||'';v._line=line;
+      visits.push(v);return}
+    const r=legacyRecord(o),e=[];
+    if(!r.recordDate)e.push('fecha no reconocida');
+    r.items.forEach(it=>{if(!it.nature)e.push(`ítem ${it.itemNumber}: naturaleza vacía o no válida`);if(!it.dimension)e.push(`ítem ${it.itemNumber}: dimensión no corresponde a D1–D13`)});
+    if(e.length){errors.push({line,msg:`${o.recordId||''} · ${e.join('; ')}`});return}
+    const det=r.items.map(it=>it.detail).join(' ');
+    if(looksLikeTest(o,det)){const msg=`${o.recordId} · posible prueba (detalle: “${trunc(det,30)}”)`;if(IMP.skipTests){tests.push({line,msg});return}warns.push({line,msg})}
+    if(o.visitorEmail&&!INSTITUTIONAL.test(String(o.visitorEmail).trim()))warns.push({line,msg:`${o.recordId} · registrado con correo no institucional (${o.visitorEmail}); se importa igual`});
+    if(!FILTER_CATALOGS.campuses.includes(r.campus))warns.push({line,msg:`${o.recordId} · sede “${r.campus}” fuera del catálogo`});
+    records.push(r)});
+  if(IMP.skipTests){const keep=new Set(records.map(r=>r.visitId).filter(Boolean));for(let i=visits.length-1;i>=0;i--){const v=visits[i];if(!keep.has(v.visitId)&&v.visitorEmail&&!INSTITUTIONAL.test(String(v.visitorEmail).trim())){tests.push({line:v._line,msg:`evento de visita ${v.visitId} sin registros reales y con correo no institucional (${v.visitorEmail})`});visits.splice(i,1)}}tests.sort((a,b)=>a.line-b.line)}
+  {const m=new Map();records.forEach(r=>m.set(r.recordId,r));records.splice(0,records.length,...m.values());const v=new Map();visits.forEach(x=>v.set(x.recordId,x));visits.splice(0,visits.length,...v.values())}
+  const dni=IMP.rows.filter(row=>{const o=findPayload(row);return o&&o.personCode}).length;
+  const ok=records.flatMap(r=>r.items.map(it=>({recordDate:r.recordDate,campus:r.campus,recordType:r.recordType,dimension:it.dimension,nature:it.nature,detailFinding:it.detail})));
+  IMP.result={ok,errors,warns,tests,dni,visits,records:[...records,...visits],fieldRecords:records.length};return IMP.result;
+}
+function renderPayloadReview(){
+  const res=evaluatePayload();
+  impStep(`<div class="imp-file"><strong>${esc(IMP.file.name)}</strong><span>${IMP.rows.length} fila(s) de datos</span>${IMP.sheets.length>1?`<label>Hoja <select id="impSheet">${IMP.sheets.map((s,i)=>`<option value="${i}"${i===IMP.sheet?' selected':''}>${esc(s.name)}</option>`).join('')}</select></label>`:''}<button type="button" class="mini" id="impChange">Cambiar archivo</button></div>
+  <div class="imp-help" style="background:#eef5fd;color:#184f95"><b>Se detectó el consolidado anterior de Ruta SISE.</b> Se importa el registro completo de cada fila (columna PAYLOAD_JSON), que es la fuente confiable aunque las demás columnas del archivo estén desplazadas. El formato antiguo se convierte al actual: “criterios” pasa a “¿Qué observaste?” y la nota pasa a “Detalle del hallazgo”.</div>
+  ${res.dni?`<div class="imp-help imp-privacy"><b>${res.dni} fila(s) traen DNI o código del estudiante o docente.</b> Ese dato se descarta: no se guarda en el consolidado nuevo.</div>`:''}
+  <label class="imp-check"><input type="checkbox" id="impSkipTests"${IMP.skipTests?' checked':''}> Excluir filas de prueba (detalle como “Prueba” o solo números, y visitas de prueba sin registros reales)</label>
+  <h4 class="imp-h">Revisión</h4>
+  <div class="imp-stats"><span class="ok"><b>${res.fieldRecords}</b> registro(s) de campo</span><span class="ok"><b>${res.visits.length}</b> evento(s) de visita</span>${IMP.skipTests?`<span class="warn"><b>${res.tests.length}</b> prueba(s) excluida(s)</span>`:''}<span class="warn"><b>${res.warns.length}</b> con advertencias</span><span class="err"><b>${res.errors.length}</b> con errores (no se importan)</span></div>
+  ${res.tests.length?`<details class="imp-issues warn"><summary>Filas excluidas como prueba</summary><ul>${res.tests.slice(0,20).map(e=>`<li>Fila ${e.line}: ${esc(e.msg)}</li>`).join('')}${res.tests.length>20?`<li>… y ${res.tests.length-20} más</li>`:''}</ul></details>`:''}
+  ${res.errors.length?`<details class="imp-issues" open><summary>Filas con errores</summary><ul>${res.errors.slice(0,12).map(e=>`<li>Fila ${e.line}: ${esc(e.msg)}</li>`).join('')}</ul></details>`:''}
+  ${res.warns.length?`<details class="imp-issues warn"><summary>Advertencias</summary><ul>${res.warns.slice(0,12).map(e=>`<li>Fila ${e.line}: ${esc(e.msg)}</li>`).join('')}</ul></details>`:''}
+  ${res.ok.length?`<div class="imp-preview"><table><thead><tr><th>Fecha</th><th>Sede</th><th>Tipo</th><th>Dimensión</th><th>Naturaleza</th><th>Detalle</th></tr></thead><tbody>${res.ok.slice(0,6).map(r=>`<tr><td>${esc(r.recordDate)}</td><td>${esc(r.campus)}</td><td>${esc(r.recordType)}</td><td>${esc(dimShort(r.dimension))}</td><td>${esc(r.nature)}</td><td>${esc(trunc(r.detailFinding,60))}</td></tr>`).join('')}</tbody></table><span class="imp-sub">Vista previa ya convertida al formato actual.</span></div>`:''}
+  <div class="imp-help">Los IDs originales se conservan (RA-…, VIS-…): si vuelves a importar el archivo, se actualizan en lugar de duplicarse. Las fotos de esos registros estaban en el sistema anterior y no se migran; el registro conserva cuántas tenía.</div>
+  <div class="imp-progress hidden" id="impProgress"><i></i><span></span></div>`);
+  $('#impFoot').innerHTML=`<button class="btn btn-outline" data-close="importModal">Cancelar</button><button class="btn btn-primary" id="impRun"${res.records.length?'':' disabled'}>Importar ${res.fieldRecords} registro(s) y ${res.visits.length} evento(s)</button>`;
+}
+
+/* ---------- normalización ---------- */
+const pad2=n=>String(n).padStart(2,'0');
+function normDate(v){
+  if(v===''||v==null)return '';
+  if(typeof v==='number'&&isFinite(v)){if(v<20000||v>80000)return '';const d=new Date(Date.UTC(1899,11,30)+Math.round(v)*864e5);return `${d.getUTCFullYear()}-${pad2(d.getUTCMonth()+1)}-${pad2(d.getUTCDate())}`}
+  const s=String(v).trim();let m=/^(\d{4})-(\d{1,2})-(\d{1,2})/.exec(s);if(m)return `${m[1]}-${pad2(m[2])}-${pad2(m[3])}`;
+  m=/^(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{2,4})/.exec(s);if(m){let y=+m[3];if(y<100)y+=2000;const d=+m[1],mo=+m[2];if(mo>12||d>31)return '';return `${y}-${pad2(mo)}-${pad2(d)}`}
+  if(/^\d{5}(\.\d+)?$/.test(s))return normDate(Number(s));return '';
+}
+function normNature(v){const n=nrm(v);if(n.startsWith('alert'))return 'Alerta';if(n.startsWith('brech'))return 'Brecha';if(n.startsWith('oportun'))return 'Oportunidad';if(n.startsWith('fortal'))return 'Fortaleza';return ''}
+function normDimension(v){const s=String(v||'').trim();if(!s)return '';const m=/^d\s*(\d{1,2})\b/i.exec(s);const cat=FILTER_CATALOGS.dimensions;if(m){const d=cat[+m[1]-1];if(d)return d}const n=nrm(s.replace(/^d\s*\d+\s*[·.\-:]*\s*/i,''));return cat.find(d=>{const dn=nrm(d.replace(/^D\d+\s*·\s*/,''));return dn===n||(n.length>5&&(dn.includes(n)||n.includes(dn)))})||''}
+function normFromCatalog(v,cat,syn={}){const n=nrm(v);if(!n)return '';const hit=cat.find(c=>nrm(c)===n)||cat.find(c=>n.length>3&&(nrm(c).includes(n)||n.includes(nrm(c))));if(hit)return hit;for(const [k,val] of Object.entries(syn))if(n.includes(k))return val;return ''}
+function normType(v){return normFromCatalog(v,FILTER_CATALOGS.recordTypes,{clase:'Observar clase',estudiant:'Voz del estudiante',alumno:'Voz del estudiante',docente:'Voz del docente',profesor:'Voz del docente',sede:'Observar sede',otro:'Otros hallazgos'})}
+function normFollowup(v){const n=nrm(v);if(!n)return '';if(n.includes('escal')||n.includes('incid'))return 'Escalar como incidencia';if(n.includes('segui'))return 'Requiere seguimiento';if(n.includes('solo')||n.includes('registr'))return 'Solo registrar';return ''}
+function normRecurrence(v){const n=nrm(v);if(!n)return '';if(n.includes('otras'))return 'Visto en otras sedes';if(n.includes('reiter')||n.includes('repet'))return 'Reiterado en esta sede';if(n.includes('nuev'))return 'Nuevo';return ''}
+function hash36(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(36).toUpperCase()}
+
+function evaluateImport(){
+  if(IMP.payload)return evaluatePayload();
+  const get=(row,k)=>{const j=IMP.map[k];return j===undefined||j===''?'':row[j]??''};
+  const ok=[],errors=[],warns=[];
+  IMP.rows.forEach((row,i)=>{
+    const line=i+2,raw=k=>String(get(row,k)).trim(),e=[],w=[];
+    const recordDate=normDate(get(row,'recordDate'));if(!recordDate)e.push('fecha vacía o no reconocida');
+    const nature=normNature(get(row,'nature'));if(!nature)e.push(`naturaleza “${raw('nature')||'vacía'}” no es Alerta, Brecha, Oportunidad ni Fortaleza`);
+    const dimension=normDimension(get(row,'dimension'));if(!dimension)e.push(`dimensión “${raw('dimension')||'vacía'}” no corresponde a D1–D13`);
+    const detail=raw('detailFinding');if(!detail)e.push('detalle vacío');
+    let campus=normFromCatalog(get(row,'campus'),FILTER_CATALOGS.campuses);if(!campus){if(raw('campus')){campus=raw('campus');w.push(`sede “${campus}” fuera del catálogo`)}else e.push('sede vacía')}
+    let recordType=normType(get(row,'recordType'));if(!recordType){recordType='Otros hallazgos';if(IMP.map.recordType!==undefined&&raw('recordType'))w.push(`tipo “${raw('recordType')}” se guardó como Otros hallazgos`)}
+    if(e.length){errors.push({line,msg:e.join('; ')});return}
+    if(w.length)warns.push({line,msg:w.join('; ')});
+    const rec={recordDate,campus,recordType,dimension,nature,detailFinding:detail,
+      queObservo:raw('queObservo'),visitId:raw('visitId'),modality:normFromCatalog(get(row,'modality'),FILTER_CATALOGS.modalities),
+      visitorName:raw('visitorName'),visitorEmail:raw('visitorEmail').toLowerCase(),visitorArea:raw('visitorArea'),visitorRole:raw('visitorRole'),
+      faculty:raw('faculty'),program:raw('program'),course:raw('course'),cycle:raw('cycle'),turn:normFromCatalog(get(row,'turn'),FILTER_CATALOGS.turns)||raw('turn'),
+      personType:raw('personType'),voiceMode:normFromCatalog(get(row,'voiceMode'),FILTER_CATALOGS.voiceModes),personName:raw('personName'),
+      groupInterviewCount:parseInt(raw('groupInterviewCount'))||'',studentCount:parseInt(raw('studentCount'))||'',
+      followup:normFollowup(get(row,'followup')),recurrence:normRecurrence(get(row,'recurrence')),derivationArea:raw('derivationArea'),derivationStatus:raw('derivationStatus'),
+      itemNumber:parseInt(raw('itemNumber'))||0,line};
+    const given=raw('recordId').replace(/[^\w.-]/g,'').slice(0,60);
+    rec.recordId=given?`IMP-${given}`:`IMP-${recordDate.replace(/-/g,'')}-${hash36([recordDate,campus,recordType,dimension,nature,detail,rec.queObservo,rec.course,rec.personName].join('|'))}`;
+    ok.push(rec);
+  });
+  // agrupa filas con el mismo ID de registro como ítems
+  const groups=new Map();ok.forEach(r=>{if(!groups.has(r.recordId))groups.set(r.recordId,[]);groups.get(r.recordId).push(r)});
+  const records=[...groups.values()].map(list=>{list.sort((a,b)=>(a.itemNumber||a.line)-(b.itemNumber||b.line));const f=list[0];const base={...f};['dimension','nature','detailFinding','queObservo','itemNumber','line'].forEach(k=>delete base[k]);
+    return {...base,historyId:f.recordId,evidenceCount:0,itemCount:list.length,items:list.map((r,i)=>({itemNumber:i+1,dimension:r.dimension,queObservo:r.queObservo,detail:r.detailFinding,nature:r.nature}))}});
+  IMP.result={ok,errors,warns,records};return IMP.result;
+}
+
+/* ---------- interfaz ---------- */
+function impStep(html){$('#impBody').innerHTML=html}
+function renderImportStart(){
+  IMP.file=null;IMP.sheets=[];IMP.result=null;
+  const batches=[...new Map(state.records.filter(r=>r.importBatch).map(r=>[r.importBatch,r])).values()].map(r=>({id:r.importBatch,file:r.importFile||'Archivo',at:r.importedAt||'',by:r.importedBy||'',n:new Set(state.records.filter(x=>x.importBatch===r.importBatch).map(x=>x.recordId)).size})).sort((a,b)=>String(b.at).localeCompare(String(a.at)));
+  impStep(`<label class="imp-drop" for="impFile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M12 11v6M9 14l3-3 3 3"/></svg><strong>Selecciona el Excel (.xlsx) o CSV</strong><span>La primera fila debe tener los encabezados. Se lee en tu navegador; solo se envían las filas válidas.</span><input type="file" id="impFile" accept=".xlsx,.csv,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"></label>
+  <div class="imp-help"><b>Columnas obligatorias:</b> Fecha, Sede, Dimensión (D1–D13 o su nombre), Naturaleza (Alerta, Brecha, Oportunidad o Fortaleza) y Detalle del hallazgo. Las demás son opcionales. <button type="button" class="mini" id="impTemplate">Descargar plantilla</button></div>
+  <div class="imp-help imp-privacy">No incluyas DNI ni códigos de estudiantes o docentes: esa información no se guarda en Ruta SISE.</div>
+  ${batches.length?`<h4 class="imp-h">Importaciones anteriores</h4><div class="imp-batches">${batches.map(b=>`<div class="imp-batch"><div><strong>${esc(b.file)}</strong><span>${esc(String(b.at).slice(0,16).replace('T',' '))} · ${b.n} registro(s) · ${esc(b.by)}</span></div><button type="button" class="mini" data-undo-import="${esc(b.id)}">Deshacer</button></div>`).join('')}</div>`:''}`);
+  $('#impFoot').innerHTML=`<button class="btn btn-outline" data-close="importModal">Cerrar</button>`;
+}
+function renderImportMapping(){
+  if(IMP.payload)return renderPayloadReview();
+  const opts=sel=>`<option value="">— No usar —</option>`+IMP.headers.map((h,j)=>`<option value="${j}"${String(sel)===String(j)?' selected':''}>${esc(h)}</option>`).join('');
+  const sample=j=>{if(j===undefined)return '';const v=IMP.rows.find(r=>String(r[j]??'').trim()!=='')?.[j];return v===undefined?'':String(v)};
+  const res=evaluateImport();
+  impStep(`<div class="imp-file"><strong>${esc(IMP.file.name)}</strong><span>${IMP.rows.length} fila(s) de datos</span>${IMP.sheets.length>1?`<label>Hoja <select id="impSheet">${IMP.sheets.map((s,i)=>`<option value="${i}"${i===IMP.sheet?' selected':''}>${esc(s.name)}</option>`).join('')}</select></label>`:''}<button type="button" class="mini" id="impChange">Cambiar archivo</button></div>
+  <h4 class="imp-h">1. Empareja las columnas</h4><p class="imp-sub">Se reconocieron automáticamente las que coinciden. Revisa y ajusta si algo no corresponde.</p>
+  ${(()=>{const row=([k,l,req])=>`<div class="imp-map-row${req&&IMP.map[k]===undefined?' missing':''}"><label for="map_${k}">${esc(l)}${req?' <span class="req">*</span>':''}</label><select id="map_${k}" data-map="${k}">${opts(IMP.map[k])}</select><span class="imp-sample">${esc(trunc(k==='recordDate'&&sample(IMP.map[k])!==''?(normDate(IMP.rows.find(r=>String(r[IMP.map[k]]??'').trim()!=='')?.[IMP.map[k]])||sample(IMP.map[k])):sample(IMP.map[k]),40))}</span></div>`;
+    const main=IMP_FIELDS.filter(f=>f[2]||IMP.map[f[0]]!==undefined),rest=IMP_FIELDS.filter(f=>!f[2]&&IMP.map[f[0]]===undefined);
+    return `<div class="imp-map">${main.map(row).join('')}</div>${rest.length?`<details class="imp-more"><summary>Más columnas opcionales (${rest.length} sin emparejar)</summary><div class="imp-map">${rest.map(row).join('')}</div></details>`:''}`})()}
+  <h4 class="imp-h">2. Revisión</h4>
+  <div class="imp-stats"><span class="ok"><b>${res.ok.length}</b> fila(s) válidas → ${res.records.length} registro(s)</span><span class="warn"><b>${res.warns.length}</b> con advertencias</span><span class="err"><b>${res.errors.length}</b> con errores (no se importan)</span></div>
+  ${res.errors.length?`<details class="imp-issues" open><summary>Filas con errores</summary><ul>${res.errors.slice(0,12).map(e=>`<li>Fila ${e.line}: ${esc(e.msg)}</li>`).join('')}${res.errors.length>12?`<li>… y ${res.errors.length-12} más</li>`:''}</ul></details>`:''}
+  ${res.warns.length?`<details class="imp-issues warn"><summary>Advertencias</summary><ul>${res.warns.slice(0,12).map(e=>`<li>Fila ${e.line}: ${esc(e.msg)}</li>`).join('')}${res.warns.length>12?`<li>… y ${res.warns.length-12} más</li>`:''}</ul></details>`:''}
+  ${res.ok.length?`<div class="imp-preview"><table><thead><tr><th>Fecha</th><th>Sede</th><th>Tipo</th><th>Dimensión</th><th>Naturaleza</th><th>Detalle</th></tr></thead><tbody>${res.ok.slice(0,6).map(r=>`<tr><td>${esc(r.recordDate)}</td><td>${esc(r.campus)}</td><td>${esc(r.recordType)}</td><td>${esc(dimShort(r.dimension))}</td><td>${esc(r.nature)}</td><td>${esc(trunc(r.detailFinding,60))}</td></tr>`).join('')}</tbody></table><span class="imp-sub">Vista previa de las primeras ${Math.min(6,res.ok.length)} filas, ya normalizadas.</span></div>`:''}
+  <div class="imp-help">Si vuelves a importar el mismo archivo, los registros se <b>actualizan</b> en lugar de duplicarse. Cada importación se puede deshacer completa.</div>
+  <div class="imp-progress hidden" id="impProgress"><i></i><span></span></div>`);
+  const missing=IMP_FIELDS.filter(f=>f[2]&&IMP.map[f[0]]===undefined).map(f=>f[1]);
+  $('#impFoot').innerHTML=`<span class="imp-foot-msg">${missing.length?`Falta emparejar: ${esc(missing.join(', '))}`:''}</span><button class="btn btn-outline" data-close="importModal">Cancelar</button><button class="btn btn-primary" id="impRun"${missing.length||!res.records.length?' disabled':''}>Importar ${res.records.length} registro(s)</button>`;
+}
+async function loadImportFile(file){
+  if(!file)return;if(file.size>15*1024*1024){toast('El archivo supera 15 MB. Divídelo en partes.');return}
+  impStep(`<div class="dash-empty">Leyendo ${esc(file.name)}…</div>`);
+  try{const buf=await file.arrayBuffer();IMP.file=file;IMP.sheets=/\.csv$/i.test(file.name)?parseCsv(new TextDecoder('utf-8').decode(buf)):await parseXlsx(buf);
+    let best=0,bestScore=-1;IMP.sheets.forEach((s,i)=>{useSheet(i);const sc=Object.keys(IMP.map).length*10000+IMP.rows.length;if(sc>bestScore){bestScore=sc;best=i}});useSheet(best);
+    if(!IMP.headers.length)throw new Error('No se encontró una fila de encabezados con datos.');renderImportMapping()}
+  catch(e){renderImportStart();toast(e.message||'No se pudo leer el archivo.')}
+}
+async function runImport(){
+  if(IMP.busy)return;const res=evaluateImport();if(!res.records.length)return;IMP.busy=true;
+  const d=new Date(),batch={id:`IMPORT-${d.getFullYear()}${pad2(d.getMonth()+1)}${pad2(d.getDate())}-${pad2(d.getHours())}${pad2(d.getMinutes())}${pad2(d.getSeconds())}-${Math.random().toString(36).slice(2,6)}`,file:IMP.file.name};
+  const btn=$('#impRun'),prog=$('#impProgress');btn.disabled=true;prog.classList.remove('hidden');let done=0,skipped=0;const size=150;
+  try{
+    for(let i=0;i<res.records.length;i+=size){const chunk=res.records.slice(i,i+size);prog.querySelector('span').textContent=`Guardando ${Math.min(i+size,res.records.length)} de ${res.records.length}…`;prog.querySelector('i').style.width=`${Math.round(i/res.records.length*100)}%`;
+      const r=await api('adminImport',{records:chunk,batch},180000);done+=(r.imported||0)+(r.visits||0);skipped+=r.skipped||0}
+    prog.querySelector('i').style.width='100%';prog.querySelector('span').textContent=`Listo: ${done} elemento(s) importados.`;
+    toast(`Importación completa: ${done} elemento(s)${skipped?` · ${skipped} omitido(s) porque ya existían desde la app`:''}.`);closeModal('importModal');await loadAll();
+  }catch(e){prog.querySelector('span').textContent=`Se detuvo: ${e.message}. ${done} registro(s) ya se guardaron; puedes reintentar sin duplicar.`;btn.disabled=false}
+  finally{IMP.busy=false}
+}
+function downloadImportTemplate(){
+  const head=IMP_FIELDS.map(f=>f[1]);const ex={recordDate:'05/11/2026',campus:'Surco',dimension:'D3',nature:'Brecha',detailFinding:'La conexión a internet del laboratorio se cae durante la clase.',recordType:'Observar clase',queObservo:'Conectividad a internet',faculty:'TECNOLOGÍAS DE LA INFORMACIÓN',program:'CIBERSEGURIDAD',course:'Redes I',cycle:'III',turn:'Noche',studentCount:'28',followup:'Requiere seguimiento',recurrence:'Reiterado en esta sede'};
+  downloadTable([head,IMP_FIELDS.map(f=>ex[f[0]]||'')],'Plantilla_Importacion_RutaSISE.xls');
+}
+document.addEventListener('change',e=>{if(e.target.id==='impFile')loadImportFile(e.target.files[0]);else if(e.target.id==='impSheet'){useSheet(+e.target.value);renderImportMapping()}else if(e.target.id==='impSkipTests'){IMP.skipTests=e.target.checked;renderImportMapping()}else if(e.target.dataset?.map){const k=e.target.dataset.map,v=e.target.value;if(v==='')delete IMP.map[k];else{Object.keys(IMP.map).forEach(x=>{if(String(IMP.map[x])===v&&x!==k)delete IMP.map[x]});IMP.map[k]=+v}renderImportMapping()}});
+document.addEventListener('click',async e=>{
+  if(e.target.closest('#importBtn')){renderImportStart();openModal('importModal');return}
+  if(e.target.closest('#impTemplate')){downloadImportTemplate();return}
+  if(e.target.closest('#impChange')){renderImportStart();return}
+  if(e.target.closest('#impRun')){runImport();return}
+  const u=e.target.closest('[data-undo-import]');if(u){const id=u.dataset.undoImport;if(!confirm('¿Deshacer esta importación? Se eliminarán del consolidado todos los registros que trajo ese archivo.'))return;u.disabled=true;u.textContent='Deshaciendo…';try{const r=await api('adminUndoImport',{batchId:id},180000);toast(`Importación deshecha: ${r.removed} registro(s) eliminados.`);await loadAll();renderImportStart()}catch(err){toast('No se pudo deshacer: '+err.message);u.disabled=false;u.textContent='Deshacer'}}
+});
+
+switchView('dashboard');
 window.addEventListener('DOMContentLoaded',boot);
 </script>
 </body></html>
